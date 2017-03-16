@@ -10,8 +10,47 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.a123cook.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+
+            android:layout_margin="15dp"
+            android:inputType="textEmailAddress"
+            android:hint="Email Address"
+            android:id="@+id/emailAddressInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+
+            android:layout_margin="15dp"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:id="@+id/passwordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        
+        <Button
+
+            android:layout_margin="15dp"
+            android:id="@+id/signInButton"
+            android:text="Sign In"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+
+            android:layout_margin="15dp"
+            android:id="@+id/signUpButton"
+            android:text="Sign Up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 </RelativeLayout>
