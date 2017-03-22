@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.a123cook.SignUpActivity">
+    tools:context="com.example.a123cook.SignInActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -22,17 +22,8 @@
         <EditText
 
             android:layout_margin="10dp"
-            android:inputType="textPassword"
-            android:hint="Enter Name"
-            android:id="@+id/nameInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <EditText
-
-            android:layout_margin="10dp"
             android:inputType="textEmailAddress"
-            android:hint="Enter Email Address"
+            android:hint="Email Address"
             android:id="@+id/emailAddressInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -41,7 +32,7 @@
 
             android:layout_margin="10dp"
             android:inputType="textPassword"
-            android:hint="Enter Password"
+            android:hint="Password"
             android:id="@+id/passwordInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -49,22 +40,21 @@
         <Button
 
             android:layout_margin="8dp"
-            android:id="@+id/signUpButton"
-            android:text="Sign Up"
+            android:id="@+id/signInButton"
+            android:text="Sign In"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="signUp" />
+            android:onClick="signIn" />
 
         <TextView
 
             android:layout_margin="1dp"
             android:gravity="center"
-            android:id="@+id/signInLink"
-            android:text="Already registered? Sign in!"
+            android:id="@+id/signUpLink"
+            android:text="Not registered? Sign up!"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="signInRedirect" />
+            android:onClick="signUpRedirect" />
 
     </LinearLayout>
 </RelativeLayout>
-

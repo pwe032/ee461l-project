@@ -19,20 +19,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
 /*
-    SignUpActivity.java provides sig-up functionalities for the user
+    SignInActivity.java is the main login screen for the application.
     References used to develop:
+        1. http://stackoverflow.com/questions/4153517/
+           how-exactly-does-the-androidonclick-xml-attribute-differ-from-setonclicklistene
 
     TODO:
-        1. Implement isValidName()
-        2. Check if account is already signed up
+        1. Interface with user profile activity
  */
-public class SignUpActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
-    @BindView(R.id.nameInput) EditText nameInput;
     @BindView(R.id.emailAddressInput) EditText emailAddressInput;
     @BindView(R.id.passwordInput) EditText passwordInput;
-    @BindView(R.id.signUpButton) Button signUpButton;
+    @BindView(R.id.signInButton) Button signInButton;
+    @BindView(R.id.signUpLink) TextView signUpLink;
 
     private FirebaseAuth auth;
     private ProgressDialog progressDialog;
@@ -40,62 +42,58 @@ public class SignUpActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_signin);
         ButterKnife.bind(this);
 
         auth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
 
-
+        if (auth.getCurrentUser() != null){
+            onValidSignIn();
+        }
     }
 
     //----------onClick Methods-------------//
+    public void signIn() {
 
-    public void signUp() {
-
-        if (!isValidEntry()) {
-            onInvalidSignUp();
-            return ;
+        //Check user entry
+        if (!isValidEntry()){
+            onInvalidSignIn();
+            return;
         }
 
-        String name = nameInput.getText().toString();
         String emailAddress = emailAddressInput.getText().toString();
         String password = passwordInput.getText().toString();
-        progressDialog.setMessage("Signing up...");
+        progressDialog.setMessage("Signing in...");
         progressDialog.show();
 
-        auth.createUserWithEmailAndPassword(emailAddress, password).addOnCompleteListener(this,
+        //Authorize with Firebase data store
+        auth.signInWithEmailAndPassword(emailAddress, password).addOnCompleteListener(this,
                 new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
-                            onValidSignUp();
+                            onValidSignIn();
                         }
                         else {
-                            onInvalidSignUp();
+                            onInvalidSignIn();
                         }
                     }
                 }
         );
     }
 
-    public void signInRedirect(){
+    public void signUpRedirect() {
 
         finish();
-        startActivity(new Intent(this, SignInActivity.class));
+        startActivity(new Intent(this, SignUpActivity.class));
     }
 
     //---------Verification Methods---------//
     public boolean isValidEntry() {
 
-        return isValidEmail() && isValidPassword() && isValidName();
-    }
-
-    public boolean isValidName(){ //Check name properties
-
-
-        return false;
+        return isValidEmail() && isValidPassword();
     }
 
     public boolean isValidEmail() { //Check email properties
@@ -124,19 +122,21 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     //--------Event-handling Methods--------//
-    public void onValidSignUp() {
+    public void onValidSignIn() {
 
-        progressDialog.setMessage("Thank you for registering!");
-        progressDialog.show();
         finish();
-        progressDialog.dismiss();
-        startActivity(new Intent(this, MainActivity.class));
+        //Start Intent for user profile;
     }
 
-    public void onInvalidSignUp(){
+    public void onInvalidSignIn() {
 
-        Toast.makeText(getBaseContext(), "Incorrect registration information.", Toast.LENGTH_LONG).show();
-        signUpButton.setEnabled(true);
+        Toast.makeText(getBaseContext(), "Incorrect email or password.", Toast.LENGTH_LONG).show();
+        signInButton.setEnabled(true);
+    }
+
+    public void onBackPressed() {
+
+        moveTaskToBack(true);
     }
 
 }
