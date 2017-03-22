@@ -28,6 +28,8 @@ import butterknife.ButterKnife;
 
     TODO:
         1. Interface with user profile activity
+        2. Add "forgot password" activity
+
  */
 public class SignInActivity extends AppCompatActivity {
 
