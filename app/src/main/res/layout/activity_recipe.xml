@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+
+
+
+
+    <TextView
+        android:id="@+id/foodName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/foodName"
+        android:textColor="@android:color/holo_red_dark"
+        android:fontFamily="casual"
+        android:textSize="40px" >
+    </TextView>
+
+    <ImageView
+        android:id="@+id/recPic"
+        android:layout_width="match_parent"
+        android:layout_height="275dp"
+        android:src="@drawable/mkp_logo">
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/recRating"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        >
+    </ImageView>
+
+    <TextView
+        android:id="@+id/recType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/foodType"
+        android:textColor="@android:color/holo_blue_dark"
+        android:fontFamily="casual"
+        android:textSize="30px" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/skillLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/skillLevel"
+        android:textColor="@android:color/holo_blue_dark"
+        android:fontFamily="casual"
+        android:textSize="30px" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/ingredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/ingredients"
+        android:textSize="25px"
+        android:textColor="@android:color/black"
+        android:fontFamily="sans-serif">
+    </TextView>
+
+    <TextView
+        android:id="@+id/instructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/instructions"
+        android:textSize="25px"
+        android:textColor="@android:color/black"
+        android:fontFamily="sans-serif">
+    </TextView>
+
+</LinearLayout>
