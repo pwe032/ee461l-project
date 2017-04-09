@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">123Cook</string>
+    <string name="profile_name">Recently Tried Recipe</string>
+    <string name="profile_button">Go To Profile</string>
 </resources>

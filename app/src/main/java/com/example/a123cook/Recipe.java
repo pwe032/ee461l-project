@@ -1,16 +1,18 @@
 package com.example.a123cook;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Recipe {
+public class Recipe implements Serializable{
     public String name;
     public double rating;
-    public int numRatings;
+    public double numRatings;
     public String imgUrl;
     public String foodType;
     public String difficulty;
-    public String instructions; //INCLUDES INGREDIENTS
+    public String instructions;
+    public String ingredients; //INCLUDES INGREDIENTS
 
     public ArrayList<String> comments = new ArrayList<String>();
 
@@ -18,9 +20,9 @@ public class Recipe {
     public Recipe(String name, double rating, String imgUrl,String foodType, String difficulty, String instructions){
         this.name = name;
         this.rating = rating;
-        this.numRatings = 0;
-        this.imgUrl = null;
-        this.foodType = null;
+        this.numRatings = rating;
+        this.imgUrl = imgUrl;
+        this.foodType = foodType;
         this.difficulty = difficulty;
         this.instructions = instructions;
     }

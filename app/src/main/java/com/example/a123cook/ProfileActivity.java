@@ -2,6 +2,7 @@ package com.example.a123cook;
 
 import com.example.a123cook.ProfileArrayAdapter;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -15,13 +16,19 @@ public class ProfileActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setListAdapter(new ProfileArrayAdapter(this, RecipeDatabase.allRecipes));
+        setListAdapter(new ProfileArrayAdapter(this, RecipeDatabase.getUniqueInstance().getAllRecipes()));
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        //get selected items
-        String selectedValue = (String) getListAdapter().getItem(position);
-        Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+        Recipe recipe = RecipeDatabase.getAllRecipes().get((int)id);
+        Intent profile = new Intent(ProfileActivity.this, RecipeActivity.class);
+        profile.putExtra("recipeObject", recipe);
+        startActivity(profile);
     }
 }
+
+
+
+
+

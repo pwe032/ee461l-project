@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1"
+    android:background="@drawable/example_profile">
+
+    <TextView
+        android:text="123 Cook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="40dp"
+        android:textSize="20pt"
+        android:textColor="@android:color/background_light"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:id="@+id/textView2" />
+
+
+    <ImageView
+        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        app:srcCompat="@android:color/background_light"
+        android:id="@+id/profilePic"
+        android:layout_gravity="center"
+        android:padding="2dp"
+        android:background="@drawable/profilepic_border"
+        android:cropToPadding="true"
+        android:scaleType="centerCrop"
+        android:layout_weight="0.48"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
+
+    <TextView
+        android:text="123cook@gmail.com"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="7pt"
+        android:id="@+id/textView"
+        android:textColor="@android:color/background_light"/>
+
+    <Button
+        android:text="View feed"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/button2"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@android:color/background_light"
+        android:textSize="7pt"
+        android:onClick="startProfileActivity"
+        style="@style/Widget.AppCompat.Button.Borderless" />
+</LinearLayout>
