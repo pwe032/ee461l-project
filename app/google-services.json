@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "177003425467",
+    "firebase_url": "https://cook-6d9e0.firebaseio.com",
+    "project_id": "cook-6d9e0",
+    "storage_bucket": "cook-6d9e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177003425467:android:bd5735f1b007798f",
+        "android_client_info": {
+          "package_name": "com.example.a123cook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177003425467-at9f8ba5r9pseei5f3dfto8t8jcolv6q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.a123cook",
+            "certificate_hash": "4c0c5f2cd8b1c54f2e42330fd705bbda24737cbf"
+          }
+        },
+        {
+          "client_id": "177003425467-qq234sn8020n918864vasfl2suk8nbho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4qiNDmjSJIbUr2FAVEZ2umLY5eLpCwZ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177003425467-qq234sn8020n918864vasfl2suk8nbho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,11 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.net.URL;
 import java.util.ArrayList;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 public class ProfileArrayAdapter extends ArrayAdapter<Recipe>{
     private final Context context;
@@ -40,18 +36,10 @@ public class ProfileArrayAdapter extends ArrayAdapter<Recipe>{
         difficulty.setText("Difficulty: "+values.get(position).difficulty);
 
         // Keep track of each Recipe by its name; Later, obtain image url directly from the Recipe object
-        String s = values.get(position).name;
-
+        String s = values.get(position).imgUrl;
         //match food image
-        if (s.equals("Sushi Rolls")) {
-            imageView.setImageResource(R.drawable.mkp_logo);
-        } else if (s.equals("Baked Salmon")) {
-            imageView.setImageResource(R.drawable.pb_logo);
-        } else if (s.equals("Crepe")) {
-            imageView.setImageResource(R.drawable.mt_logo);
-        } else {
-            imageView.setImageResource(R.drawable.gn_logo);
-        }
+        int res = this.getContext().getResources().getIdentifier(values.get(position).imgUrl, "drawable",this.getContext().getPackageName());
+        imageView.setImageResource(res);
 
         //match star image
         if(values.get(position).rating == 5.0){

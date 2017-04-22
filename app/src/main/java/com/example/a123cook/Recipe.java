@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 
 public class Recipe implements Serializable{
+
     public String name;
     public double rating;
     public double numRatings;
@@ -13,11 +14,22 @@ public class Recipe implements Serializable{
     public String difficulty;
     public String instructions;
     public String ingredients; //INCLUDES INGREDIENTS
-
     public ArrayList<String> comments = new ArrayList<String>();
 
+    public Recipe(){
 
-    public Recipe(String name, double rating, String imgUrl,String foodType, String difficulty, String instructions){
+        this.name = "no name";
+        this.rating = 0.0;
+        this.numRatings = 0;
+        this.imgUrl = "mkp_logo";
+        this.foodType = "n/a";
+        this.difficulty = "n/a";
+        this.instructions ="n/a";
+        this.ingredients = "n/a";
+    }
+
+    public Recipe(String name, double rating, String imgUrl,String foodType, String difficulty, String instructions, String ingredients){
+
         this.name = name;
         this.rating = rating;
         this.numRatings = rating;
@@ -25,6 +37,7 @@ public class Recipe implements Serializable{
         this.foodType = foodType;
         this.difficulty = difficulty;
         this.instructions = instructions;
+        this.ingredients = ingredients;
     }
 
     public void updateRating(double newRating){
@@ -36,6 +49,7 @@ public class Recipe implements Serializable{
     }
 
     public void addComment(String newComment){
+
         comments.add(newComment);
     }
 

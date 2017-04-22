@@ -1,38 +1,23 @@
 package com.example.a123cook;
 
-import com.example.a123cook.ProfileArrayAdapter;
-import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.view.View;
-
-import java.util.ArrayList;
-import com.example.a123cook.Recipe;
 
 public class RecipeActivity extends AppCompatActivity{
 
-    public RecipeDatabase center = RecipeDatabase.getUniqueInstance();
-    public RecipeActivity(){
-    }
-
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
-        Intent getRecipe = getIntent();
+        Intent getRecipe = getIntent(); //receive recipe object from ProfileActivity
         Recipe recipe = (Recipe)getRecipe.getSerializableExtra("recipeObject");
-        makeDisplay(recipe);
+        makeDisplay(recipe); //show this recipe
     }
 
     public void makeDisplay(Recipe recipe) {
-        //determine how Profile Listview will present its contents
         //create View components that make up the recipe post
         TextView foodName = (TextView) findViewById(R.id.foodName); // Recipe post has a food name
         ImageView foodPic = (ImageView) findViewById(R.id.recPic); // Recipe post has food image
@@ -41,8 +26,8 @@ public class RecipeActivity extends AppCompatActivity{
         TextView ingredients = (TextView) findViewById(R.id.ingredients);
         TextView instructions = (TextView) findViewById(R.id.instructions); // instructions
         TextView difficulty = (TextView) findViewById(R.id.skillLevel); // difficulty
-        //give View components their appropriate values from a Recipe object
 
+        //give View components their appropriate values from a Recipe object
         foodName.setText(recipe.name);
         int res = getResources().getIdentifier(recipe.imgUrl, "drawable",getPackageName());
         foodPic.setImageResource(res);
@@ -51,7 +36,7 @@ public class RecipeActivity extends AppCompatActivity{
         instructions.setText(recipe.instructions);
         difficulty.setText(recipe.difficulty);
 
-        //match star image
+        //match star image with rating
         if(recipe.rating == 5.0){
             rating.setImageResource(R.drawable.five_stars);
         } else if (recipe.rating == 4.5){
