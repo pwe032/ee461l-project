@@ -29,6 +29,8 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:10.2.0'
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    apply plugin: 'com.google.gms.google-services'
+    compile 'com.google.android.gms:play-services-auth:10.2.0'
 
 }
 
