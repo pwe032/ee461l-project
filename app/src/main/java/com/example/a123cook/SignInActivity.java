@@ -60,20 +60,14 @@ import butterknife.ButterKnife;
 
     TODO:
         1. Interface with user profile activity
-        2. Add "forgot password" activity
+        2. Add "sign-out" page
 
  */
-public class SignInActivity extends AppCompatActivity implements
-        GoogleApiClient.OnConnectionFailedListener {
+public class SignInActivity extends AppCompatActivity {
 
-
-    private static final String TAG = "GoogleActivity";
-    private static final int RC_SIGN_IN = 9001;
-
-    @BindView(R.id.emailAddressInput) EditText emailAddressInput;
-    @BindView(R.id.passwordInput) EditText passwordInput;
-    @BindView(R.id.signInButton) Button signInButton;
-    @BindView(R.id.signUpLink) TextView signUpLink;
+    private EditText emailAddressInput, passwordInput;
+    private Button signInButton;
+    private TextView signUpLink;
 
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth auth;
@@ -83,18 +77,11 @@ public class SignInActivity extends AppCompatActivity implements
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
-        ButterKnife.bind(this);
 
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+        emailAddressInput = (EditText) findViewById(R.id.emailAddressInput);
+        passwordInput = (EditText) findViewById(R.id.passwordInput);
+        signInButton = (Button) findViewById(R.id.signInButton);
+        signUpLink = (TextView) findViewById(R.id.signUpLink);
 
         auth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
@@ -104,159 +91,77 @@ public class SignInActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-        if (opr.isDone()) {
-            // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
-            // and the GoogleSignInResult will be available instantly.
-            Log.d(TAG, "Got cached sign-in");
-            GoogleSignInResult result = opr.get();
-            handleSignInResult(result);
-        } else {
-            // If the user has not previously signed in on this device or the sign-in has expired,
-            // this asynchronous branch will attempt to sign in the user silently.  Cross-device
-            // single sign-on will occur in this branch.
-            progressDialog.show();
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(GoogleSignInResult googleSignInResult) {
-                    progressDialog.dismiss();
-                    handleSignInResult(googleSignInResult);
-                }
-            });
-        }
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleSignInResult(result);
-        }
-    }
-
 
     //----------onClick Methods-------------//
-//    public void signIn() {
-//
-//        //Check user entry
-//        if (!isValidEntry()){
-//            onInvalidSignIn();
-//            return;
-//        }
-//
-//        String emailAddress = emailAddressInput.getText().toString();
-//        String password = passwordInput.getText().toString();
-//        progressDialog.setMessage("Signing in...");
-//        progressDialog.show();
-//
-//        //Authorize with Firebase data store
-//        auth.signInWithEmailAndPassword(emailAddress, password).addOnCompleteListener(this,
-//                new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        progressDialog.dismiss();
-//                        if (task.isSuccessful()) {
-//                            onValidSignIn();
-//                        }
-//                        else {
-//                            onInvalidSignIn();
-//                        }
-//                    }
-//                }
-//        );
-//    }
+    public void signIn(View view) {
 
-    public void signUpRedirect() {
+        //Check user entry
+        if (!isValidEntry()){
+            onInvalidSignIn();
+            return;
+        }
 
+        String emailAddress = emailAddressInput.getText().toString();
+        String password = passwordInput.getText().toString();
+        progressDialog.setMessage("Signing in...");
+        progressDialog.show();
+
+        //Authorize with Firebase data store
+        auth.signInWithEmailAndPassword(emailAddress, password).addOnCompleteListener(this,
+                new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressDialog.dismiss();
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(SignInActivity.this, "Incorrect email or password.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            onValidSignIn();
+                        }
+                    }
+                }
+        );
+    }
+
+    public void signUpRedirect(View view) {
         finish();
-        startActivity(new Intent(this, SignUpActivity.class));
+        startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
     }
 
     //---------Verification Methods---------//
     public boolean isValidEntry() {
-
         return isValidEmail() && isValidPassword();
     }
 
     public boolean isValidEmail() { //Check email properties
-
-        boolean isValid = true;
         String emailAddress = emailAddressInput.getText().toString();
-
-        if (emailAddress.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches()) {
-            emailAddressInput.setError("Sorry, we don't recognize that email.");
-            isValid = false;
-        }
+        boolean isValid = !emailAddress.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches();
 
         return isValid;
     }
 
     public boolean isValidPassword() { //Check password properties
-
-        boolean isValid = true;
         String password = passwordInput.getText().toString();
-
-        if (password.isEmpty()) {
-            passwordInput.setError("Invalid password. Please try again.");
-        }
+        boolean isValid = !password.isEmpty();
 
         return isValid;
     }
 
     //--------Event-handling Methods--------//
     public void onValidSignIn() {
-
         finish();
-        //Start Intent for user profile;
+        //TODO: Start Intent for user profile;
+        startActivity(new Intent(SignInActivity.this, ProfileActivity.class));
     }
 
     public void onInvalidSignIn() {
-
         Toast.makeText(getBaseContext(), "Incorrect email or password.", Toast.LENGTH_LONG).show();
         signInButton.setEnabled(true);
     }
 
     public void onBackPressed() {
-
         moveTaskToBack(true);
-    }
-
-    //--------Sign-in helper methods--------//
-
-    private void handleSignInResult(GoogleSignInResult result) {
-        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        if (result.isSuccess()) {
-            // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
-            updateUI(true);
-        } else {
-            // Signed out, show unauthenticated UI.
-            updateUI(false);
-        }
-    }
-
-    private void updateUI(boolean signedIn) {
-        progressDialog.dismiss();
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
-        // be available.
-        Log.d(TAG, "onConnectionFailed:" + connectionResult);
-    }
-
-    public void signIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
 }
