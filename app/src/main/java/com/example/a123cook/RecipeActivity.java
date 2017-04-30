@@ -68,7 +68,5 @@ public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
 
     }
 
-
-
-
 }
+

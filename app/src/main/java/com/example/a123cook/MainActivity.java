@@ -1,7 +1,6 @@
 package com.example.a123cook;
 
-import android.app.Activity;
-//import android.app.Fragment;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.FragmentManager;
@@ -21,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
-
 public class MainActivity extends AppCompatActivity {
     public DrawerLayout mDrawer;
     private Toolbar toolbar;
@@ -31,8 +29,10 @@ public class MainActivity extends AppCompatActivity {
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
     private ActionBarDrawerToggle drawerToggle;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Find our drawer view
@@ -109,5 +109,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+
     }
+
 }
+

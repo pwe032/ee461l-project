@@ -7,12 +7,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+<<<<<<< HEAD
     <!-- Activity with no Title -->
     <style name="ThemeOverlay.MyNoTitleActivity" parent="AppTheme">
+=======
+    <style name="AppTheme.NoActionBar">
+>>>>>>> 5e570e5339e7fcb151dcd99d8e03bcc57cbcae64
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
+<<<<<<< HEAD
     <!-- Dark Buttons -->
     <style name="ThemeOverlay.MyDarkButton" parent="ThemeOverlay.AppCompat.Dark">
         <item name="colorButtonNormal">@color/colorAccent</item>
@@ -46,3 +51,10 @@
     </style>
 
 </resources>
+=======
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>
+>>>>>>> 5e570e5339e7fcb151dcd99d8e03bcc57cbcae64
