@@ -18,11 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /*
     SignUpActivity.java provides sig-up functionalities for the user
@@ -41,10 +41,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     //firebase authentication fields
     private FirebaseAuth auth;
+    private FirebaseDatabase database;
     private ProgressDialog progressDialog;
 
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
@@ -55,6 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
         signInLink = (TextView) findViewById(R.id.signInLink);
 
         auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
         progressDialog = new ProgressDialog(this);
 
     }
@@ -69,6 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         String emailAddress = emailAddressInput.getText().toString();
         String password = passwordInput.getText().toString();
+        final String name = nameInput.getText().toString();
         progressDialog.setMessage("Signing up...");
         progressDialog.show();
 
@@ -83,11 +85,12 @@ public class SignUpActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             //Construct and add user object to realtime database
-                            System.out.println("New User ref: " + (FirebaseAuth.getInstance().getCurrentUser() != null));
-                            User newUser = new User(FirebaseAuth.getInstance().getCurrentUser());
-                            System.out.println("New user email: " + newUser.getEmail());
-
-                            System.out.println("LOG: new user has signed up.");
+                            FirebaseAuth.getInstance().getCurrentUser().updateProfile(
+                                    new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(name).build());
+                            User newUser = new User(FirebaseAuth.getInstance().getCurrentUser(), name);
+                            System.out.println("LOG: new user has signed up with name: " + newUser.getAttemptedRecipes());
+                            newUser.addAttemptedRecipe(new Recipe("gn",1.0,"gn_logo","asian","5","instr"));
                             onValidSignUp();
                         }
                     }

@@ -47,11 +47,6 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
 
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-
 /*
     SignInActivity.java is the main login screen for the application.
     References used to develop:

@@ -13,42 +13,43 @@ import java.util.ArrayList;
  */
 
 public class SearchRecipesActivity extends AppCompatActivity {
-    RecipeDatabase rdb;
-
-    Spinner foodTypeSpinner;
-    Spinner difficultySpinner;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_recipes);
-
-        foodTypeSpinner = (Spinner)findViewById(R.id.foodTypeSpinner);
-        difficultySpinner = (Spinner)findViewById(R.id.diffcultySpinner);
-        rdb = new RecipeDatabase();
-    }
-
-    public ArrayList<Recipe> searchButtonOnClick(View view) {
-        String foodTypeSelection = foodTypeSpinner.getSelectedItem().toString();
-        String difficultySelection = difficultySpinner.getSelectedItem().toString();
-
-        ArrayList<Recipe> suggestedRecipes = new ArrayList<Recipe>();
-
-        for (Recipe r : rdb.getAllRecipes()) {                    //get all recipes that match user selections
-            if (foodTypeSelection.equals(r.foodType)) {
-                suggestedRecipes.add(r);
-            }
-            if (difficultySelection.equals(r.difficulty)) {
-                suggestedRecipes.add(r);
-            }
-        }
-
-
-        //suggestedRecipes.sort(<enter Comparator>);
-        for (Recipe r : suggestedRecipes) {                         //TODO: sort suggested recpies based on user ingredients
-
-        }
-
-        return suggestedRecipes;
-    }
+//    RecipeDatabase rdb;
+//
+//    Spinner foodTypeSpinner;
+//    Spinner difficultySpinner;
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_search_recipes);
+//
+//        foodTypeSpinner = (Spinner)findViewById(R.id.foodTypeSpinner);
+//        difficultySpinner = (Spinner)findViewById(R.id.diffcultySpinner);
+//        rdb = new RecipeDatabase();
+//    }
+//
+//    public ArrayList<Recipe> searchButtonOnClick(View view) {
+//        String foodTypeSelection = foodTypeSpinner.getSelectedItem().toString();
+//        String difficultySelection = difficultySpinner.getSelectedItem().toString();
+//
+//        ArrayList<Recipe> suggestedRecipes = new ArrayList<Recipe>();
+//
+//        for (Recipe r : rdb.getAllRecipes()) {                    //get all recipes that match user selections
+//            if (foodTypeSelection.equals(r.foodType)) {
+//                suggestedRecipes.add(r);
+//            }
+//            if (difficultySelection.equals(r.difficulty)) {
+//                suggestedRecipes.add(r);
+//            }
+//        }
+//
+//
+//        //suggestedRecipes.sort(<enter Comparator>);
+//        for (Recipe r : suggestedRecipes) {
+//          //TODO: sort suggested recpies based on user ingredients
+//
+//        }
+//
+//        return suggestedRecipes;
+//    }
 }

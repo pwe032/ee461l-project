@@ -1,8 +1,13 @@
 package com.example.a123cook;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * The User class helps to maintain information about the user
@@ -16,15 +21,21 @@ public class User {
     private String userID;
     private String email;
     private String name;
-    private ArrayList<Recipe> attemptedRecipes;
+    private List<Recipe> attemptedRecipes;
+    private FirebaseDatabase database;
 
     public User() {} //for Firebase data snapshot
 
-    public User(FirebaseUser firebaseUser) {
+    public User(FirebaseUser firebaseUser, String name) {
         this.userID = firebaseUser.getUid();
         this.email = firebaseUser.getEmail();
-        this.name = firebaseUser.getDisplayName();
+        this.name = name;
         this.attemptedRecipes = new ArrayList<Recipe>();
+
+        //add to database
+        database = FirebaseDatabase.getInstance();
+        database.getReference().child("users").child(userID).setValue(this);
+        database.getReference().child("users").child(userID).child("attemptedRecipes").push();
     }
 
     public User(String userID, String email, String name) {
@@ -42,7 +53,7 @@ public class User {
         return email;
     }
 
-    public ArrayList<Recipe> getAttemptedRecipes() {
+    public List<Recipe> getAttemptedRecipes() {
         return attemptedRecipes;
     }
 
@@ -52,6 +63,7 @@ public class User {
 
     public void addAttemptedRecipe(Recipe attemptedRecipe) {
         attemptedRecipes.add(attemptedRecipe);
+        database.getReference().child("users").child(userID).child("attemptedRecipes").push().setValue(attemptedRecipe);
         //make change to database
     }
 }
