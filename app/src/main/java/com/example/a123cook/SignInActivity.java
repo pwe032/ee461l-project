@@ -81,9 +81,9 @@ public class SignInActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
 
-        if (auth.getCurrentUser() != null){
-            onValidSignIn();
-        }
+//        if (auth.getCurrentUser() != null){
+//            onValidSignIn();
+//        }
     }
 
 

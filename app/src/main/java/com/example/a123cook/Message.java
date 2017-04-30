@@ -1,5 +1,7 @@
 package com.example.a123cook;
 
+import java.util.Date;
+
 /**
  * The Message class helps to create chat messages between
  * two people in a conversation.
@@ -11,29 +13,22 @@ public class Message {
     private String message;
     private String senderID;
     private String senderName;
-    private String receiverID;
-    private String receiverName;
     private long timestamp;
 
     public Message() {} //for Firebase data snapshot
 
-    public Message(String message, User sender, User receiver, long timestamp) {
+    public Message(String message, User sender) {
         this.message = message;
         this.senderID = sender.getUserID();
         this.senderName = sender.getName();
-        this.receiverID = receiver.getUserID();
-        this.receiverName = receiver.getName();
-        this.timestamp = timestamp;
+        this.timestamp = new Date().getTime();
     }
 
-    public Message(String message, String senderID, String senderName, String receiverID,
-                   String receiverName, long timestamp) {
+    public Message(String message, String senderID, String senderName) {
         this.message = message;
         this.senderID = senderID;
         this.senderName = senderName;
-        this.receiverID = receiverID;
-        this.receiverName = receiverName;
-        this.timestamp = timestamp;
+        this.timestamp = new Date().getTime();
     }
 
     public String getMessage() {
@@ -46,14 +41,6 @@ public class Message {
 
     public String getSenderName() {
         return senderName;
-    }
-
-    public String getReceiverID() {
-        return receiverID;
-    }
-
-    public String getReceiverName() {
-        return receiverName;
     }
 
     public long getTimestamp() {

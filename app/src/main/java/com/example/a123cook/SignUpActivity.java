@@ -41,7 +41,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     //firebase authentication fields
     private FirebaseAuth auth;
-    private FirebaseDatabase database;
     private ProgressDialog progressDialog;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,6 @@ public class SignUpActivity extends AppCompatActivity {
         signInLink = (TextView) findViewById(R.id.signInLink);
 
         auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
         progressDialog = new ProgressDialog(this);
 
     }
@@ -90,7 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     .setDisplayName(name).build());
                             User newUser = new User(FirebaseAuth.getInstance().getCurrentUser(), name);
                             System.out.println("LOG: new user has signed up with name: " + newUser.getAttemptedRecipes());
-                            newUser.addAttemptedRecipe(new Recipe("gn",1.0,"gn_logo","asian","5","instr"));
+                            newUser.addAttemptedRecipe(new Recipe("gn", 1.0, "gn_logo", "asian", "5", "instr"));
                             onValidSignUp();
                         }
                     }
