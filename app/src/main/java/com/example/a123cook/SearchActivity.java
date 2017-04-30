@@ -18,13 +18,11 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         public void startSearchActivity(View view){
-
             EditText name = (EditText) findViewById(R.id.edit_message);
             Entry = name.getText().toString();
-            Intent resultsPage = new Intent(SearchActivity.this, SearchResultsActivity.class); //CHNAGE TO MESSAGE ACT
+            Intent resultsPage = new Intent(this, SearchResultsActivity.class); //CHNAGE TO MESSAGE ACT
             resultsPage.putExtra("Name", Entry);
             startActivity(resultsPage);
-
         }
 
 

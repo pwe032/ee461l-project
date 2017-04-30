@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import android.content.Context;
 
-public class ProfileActivity extends ListActivity {
+public class ProfileActivity extends ListActivity{
 
     private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
     private Context context;

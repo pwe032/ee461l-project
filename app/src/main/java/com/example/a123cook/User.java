@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class User {
 
-    private String userID;
+    private static String userID;
     private String email;
     private String name;
     private List<Recipe> attemptedRecipes;
@@ -57,7 +57,7 @@ public class User {
         return attemptedRecipes;
     }
 
-    public String getUserID() {
+    public static String getUserID() {
         return userID;
     }
 

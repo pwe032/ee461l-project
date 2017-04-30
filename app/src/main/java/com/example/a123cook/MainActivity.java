@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch(menuItem.getItemId()) {
             case R.id.nav_first_fragment:
-                Intent search = new Intent(this, ProfileActivity.class);
+                Intent search = new Intent(this, SearchActivity.class);
                 startActivity(search);
                 break;
             case R.id.nav_second_fragment:
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(ingredients);
                 break;
             case R.id.nav_third_fragment:
-                Intent suggestions = new Intent(this, ProfileIntroActivity.class);
+                Intent suggestions = new Intent(this, MainActivity.class);
                 startActivity(suggestions);
                 break;
             case R.id.nav_fourth_fragment:
@@ -81,12 +81,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(message);
                 break;
             case R.id.nav_fifth_fragment:
-                Intent account = new Intent(this, ProfileIntroActivity.class);
+                Intent account = new Intent(this, AccountActivity.class);
                 startActivity(account);
                 break;
             case R.id.nav_sixth_fragment:
-                Intent signout = new Intent(this, ProfileIntroActivity.class);
-                startActivity(signout);
+                Intent signOut = new Intent(this, SignOutActivity.class);
+                startActivity(signOut);
                 break;
             default:
         }

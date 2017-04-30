@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- NEWLY ADDED THIS ONE -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -67,16 +68,17 @@
         android:textSize="7pt"
         android:onClick="startProfileActivity"
         style="@style/Widget.AppCompat.Button.Borderless" />
+
 </LinearLayout>
 
     <!-- The navigation drawer that comes from the left -->
     <!-- Note that `android:layout_gravity` needs to be set to 'start' -->
-<android.support.design.widget.NavigationView
-android:id="@+id/nvView"
-android:layout_width="wrap_content"
-android:layout_height="match_parent"
-android:layout_gravity="start"
-    app:headerLayout="@layout/nav_header"
-android:background="@android:color/white"
-app:menu="@layout/menu_drawer_view" />
-    </android.support.v4.widget.DrawerLayout>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nvView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        app:menu="@layout/menu_drawer_view" />
+</android.support.v4.widget.DrawerLayout>
+

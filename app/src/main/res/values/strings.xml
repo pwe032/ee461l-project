@@ -1,18 +1,7 @@
 <resources>
     <string name="app_name">123Cook</string>
-<<<<<<< HEAD
     <string name="profile_name">Recently Tried Recipe</string>
     <string name="profile_button">Go To Profile</string>
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-    </string-array>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
@@ -20,21 +9,17 @@
     <string name="google_status_fmt">Google User: %s</string>
     <string name="firebase_status_fmt">Firebase User: %s</string>
     <string name="signed_out">Signed Out</string>
-
-=======
     <string name="action_settings">Settings</string>
     <string name="email">Email Id</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="login_register">New user, tap here to register !</string>
     <string name="register">Register</string>
-
     <string name="user_successfully_added">User successfully added!</string>
     <string name="user_unable_to_add">Unable to add user!</string>
     <string name="adding_user_to_db">Adding user to database.</string>
     <string name="loading">Loading</string>
     <string name="please_wait">Please wait...</string>
-
     <string name="font_family_roboto_light">sans-serif-thin</string>
     <string name="type_a_message">Type a message...</string>
     <string name="action_logout">Logout</string>
@@ -42,5 +27,4 @@
     <string name="logout">Logout</string>
     <string name="are_you_sure">Are you sure ?</string>
     <string name="cancel">Cancel</string>
->>>>>>> 5e570e5339e7fcb151dcd99d8e03bcc57cbcae64
 </resources>
