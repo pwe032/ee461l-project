@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity
+               <activity
             android:name=".AccountActivity">
         </activity>
 
@@ -38,9 +38,6 @@
             android:name=".ProfileActivity">
         </activity>
 
-        <activity
-            android:name=".SearchResultsActivity">
-        </activity>
 
         <activity
             android:name=".RecipeActivity">
@@ -54,6 +51,9 @@
             android:name=".ProfileIntroActivity">
         </activity>
 
+        <activity
+            android:name=".MessageActivity">
+        </activity>
 
     </application>
 </manifest>

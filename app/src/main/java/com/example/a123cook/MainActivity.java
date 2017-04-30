@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(suggestions);
                 break;
             case R.id.nav_fourth_fragment:
-                Intent message = new Intent(this, ProfileIntroActivity.class);
+                Intent message = new Intent(this, MessageActivity.class);
                 startActivity(message);
                 break;
             case R.id.nav_fifth_fragment:

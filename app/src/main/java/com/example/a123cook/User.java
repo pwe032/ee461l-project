@@ -32,11 +32,11 @@ public class User {
         database.getReference().child("users").child(userID).child("attemptedRecipes").push();
     }
 
-    public User(String userID, String email, String name) {
+    public User(String userID, String email, String name, List<Recipe> attemptedRecipes) {
         this.userID = userID;
         this.email = email;
         this.name = name;
-        this.attemptedRecipes = new ArrayList<Recipe>();
+        this.attemptedRecipes = attemptedRecipes;
     }
 
     public String getName() {
@@ -51,7 +51,8 @@ public class User {
         return attemptedRecipes;
     }
 
-    public  String getUserID() {
+
+    public String getUserID() {
         return userID;
     }
 
