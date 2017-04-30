@@ -10,12 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/**
- * The User class helps to maintain information about the user
- * (i.e. recipes they have tried, image, userID, etc.)
- * By: Gaurav Nagar
- * Date: 4/29/2017
- */
 
 public class User {
 
@@ -59,9 +53,11 @@ public class User {
         return attemptedRecipes;
     }
 
+
     public String getUserID() {
         return userID;
     }
+
 
     public void addAttemptedRecipe(Recipe attemptedRecipe) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();

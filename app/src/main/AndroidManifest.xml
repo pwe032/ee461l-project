@@ -11,11 +11,19 @@
         android:label="@string/app_name">
 
         <activity
-        android:name=".SignInActivity">
+            android:name=".SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+               <activity
+            android:name=".AccountActivity">
+        </activity>
+
+        <activity
+        android:name=".SignUpActivity">
         </activity>
 
         <activity
@@ -30,9 +38,6 @@
             android:name=".ProfileActivity">
         </activity>
 
-        <activity
-            android:name=".SignUpActivity">
-        </activity>
 
         <activity
             android:name=".RecipeActivity">
@@ -44,10 +49,6 @@
 
         <activity
             android:name=".ProfileIntroActivity">
-        </activity>
-
-        <activity
-            android:name=".AccountActivity">
         </activity>
 
         <activity
