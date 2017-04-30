@@ -2,6 +2,7 @@ package com.example.a123cook;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -22,9 +23,10 @@ public class ProfileIntroActivity extends MainActivity {
         setupDrawerContent(nvDrawer);
 
         //Get user from Firebase Auth or from Search Activity
-
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        Uri photoUrl = currentUser.getPhotoUrl();
         ImageView profilePic = (ImageView) findViewById(R.id.profilePic);
-        profilePic.setImageResource(R.drawable.example_profile);
+        profilePic.setImageURI(photoUrl);
     }
     public void startProfileActivity(View view){
         Intent profile = new Intent(ProfileIntroActivity.this, ProfileActivity.class);

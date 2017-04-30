@@ -9,16 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-/**
- * The User class helps to maintain information about the user
- * (i.e. recipes they have tried, image, userID, etc.)
- * By: Gaurav Nagar
- * Date: 4/29/2017
- */
 
 public class User {
 
-    private static String userID;
+    private String userID;
     private String email;
     private String name;
     private List<Recipe> attemptedRecipes;
@@ -57,9 +51,10 @@ public class User {
         return attemptedRecipes;
     }
 
-    public static String getUserID() {
+    public  String getUserID() {
         return userID;
     }
+
 
     public void addAttemptedRecipe(Recipe attemptedRecipe) {
         attemptedRecipes.add(attemptedRecipe);

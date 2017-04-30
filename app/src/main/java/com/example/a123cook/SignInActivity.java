@@ -146,11 +146,7 @@ public class SignInActivity extends AppCompatActivity {
     //--------Event-handling Methods--------//
     public void onValidSignIn() {
         finish();
-        //TODO: Start Intent for user profile;
-        // get this user's arraylist of Recipes
-        // pass that user with serializable to profileactivity
-        // within profileactivity, get the user's arraylist and pass to adapter
-        startActivity(new Intent(SignInActivity.this, ProfileActivity.class));
+        startActivity(new Intent(SignInActivity.this, ProfileIntroActivity.class));
     }
 
     public void onInvalidSignIn() {
