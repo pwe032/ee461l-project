@@ -2,11 +2,13 @@ package com.example.a123cook;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class RecipeActivity extends AppCompatActivity{
+public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -15,6 +17,9 @@ public class RecipeActivity extends AppCompatActivity{
         Intent getRecipe = getIntent(); //receive recipe object from ProfileActivity
         Recipe recipe = (Recipe)getRecipe.getSerializableExtra("recipeObject");
         makeDisplay(recipe); //show this recipe
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        setupDrawerContent(nvDrawer);
     }
 
     public void makeDisplay(Recipe recipe) {

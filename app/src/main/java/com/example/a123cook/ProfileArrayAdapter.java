@@ -20,6 +20,8 @@ public class ProfileArrayAdapter extends ArrayAdapter<Recipe>{
     }
 
     @Override
+
+
     public View getView(int position, View convertView, ViewGroup parent) {
         //determine how Profile Listview will present its contents
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
