@@ -1,18 +1,25 @@
 <resources>
     <string name="app_name">123Cook</string>
+    <string name="profile_name">Recently Tried Recipe</string>
+    <string name="profile_button">Go To Profile</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="google_status_fmt">Google User: %s</string>
+    <string name="firebase_status_fmt">Firebase User: %s</string>
+    <string name="signed_out">Signed Out</string>
     <string name="action_settings">Settings</string>
     <string name="email">Email Id</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="login_register">New user, tap here to register !</string>
     <string name="register">Register</string>
-
     <string name="user_successfully_added">User successfully added!</string>
     <string name="user_unable_to_add">Unable to add user!</string>
     <string name="adding_user_to_db">Adding user to database.</string>
     <string name="loading">Loading</string>
     <string name="please_wait">Please wait...</string>
-
     <string name="font_family_roboto_light">sans-serif-thin</string>
     <string name="type_a_message">Type a message...</string>
     <string name="action_logout">Logout</string>

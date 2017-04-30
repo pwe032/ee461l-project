@@ -1,27 +1,72 @@
 package com.example.a123cook;
 
-import com.example.a123cook.ProfileArrayAdapter;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.view.View;
-
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
-import com.example.a123cook.Recipe;
+import android.content.Context;
 
-public class ProfileActivity extends ListActivity {
-//This activity(separate screen) displays each user's profile feed
+public class ProfileActivity extends ListActivity{
+
+    private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setListAdapter(new ProfileArrayAdapter(this, RecipeDatabase.allRecipes));
+        final ProfileArrayAdapter adapter = new ProfileArrayAdapter(this, recipes);
+        setListAdapter(adapter);
+
+        //read from real-time Firebase database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("allRecipes");
+        myRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Recipe rec = dataSnapshot.getValue(Recipe.class);
+                adapter.add(rec);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Recipe rec = dataSnapshot.getValue(Recipe.class);
+                adapter.remove(rec);
+                adapter.add(rec);
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                Recipe rec = dataSnapshot.getValue(Recipe.class);
+                adapter.remove(rec);
+            }
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                Recipe rec = dataSnapshot.getValue(Recipe.class);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        //get selected items
-        String selectedValue = (String) getListAdapter().getItem(position);
-        Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
+        //on click, pass current Recipe object to RecipeActivity to show full post
+        Recipe recipe = this.recipes.get((int)id);
+        Intent profile = new Intent(ProfileActivity.this, RecipeActivity.class);
+        profile.putExtra("recipeObject", recipe);
+        startActivity(profile);
     }
 }
+
+
+
+
+
+

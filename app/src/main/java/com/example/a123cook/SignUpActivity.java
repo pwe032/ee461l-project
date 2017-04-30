@@ -85,10 +85,10 @@ public class SignUpActivity extends AppCompatActivity {
                             //Construct and add user object to realtime database
                             FirebaseAuth.getInstance().getCurrentUser().updateProfile(
                                     new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(name).build());
+                                            .setDisplayName(name).build());
                             User newUser = new User(FirebaseAuth.getInstance().getCurrentUser(), name);
                             System.out.println("LOG: new user has signed up with name: " + newUser.getAttemptedRecipes());
-                            newUser.addAttemptedRecipe(new Recipe("gn", 1.0, "gn_logo", "asian", "5", "instr"));
+                            newUser.addAttemptedRecipe(new Recipe("gn", 1.0, "gn_logo", "asian", "5", "instr", "ingredients"));
                             onValidSignUp();
                         }
                     }

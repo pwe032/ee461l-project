@@ -63,21 +63,25 @@ public class MessageActivity extends AppCompatActivity {
     public void onSendButtonClick(View view){
         String senderID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final String sendMessage = message.getEditableText().toString();//message to be sent
+        if (!sendMessage.isEmpty()) {
+            database.child("users").child(senderID).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    String senderName = (String) ((Map<String, Object>) snapshot.getValue()).get("name");
+                    String senderEmail = (String) ((Map<String, Object>) snapshot.getValue()).get("email");
+                    String senderID = (String) ((Map<String, Object>) snapshot.getValue()).get("userID");
+                    System.out.println(((Map<String, Object>) snapshot.getValue()).get("attemptedRecipes"));
+                    User user = new User(senderID, senderEmail, senderName, null); //fix this
+                    messageDatabaseRef.push().setValue(new Message(sendMessage, user));
+                }
 
-        database.child("users").child(senderID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                String senderName = (String) ((Map<String, Object>) snapshot.getValue()).get("name");
-                String senderEmail = (String) ((Map<String, Object>) snapshot.getValue()).get("email");
-                String senderID = (String) ((Map<String, Object>) snapshot.getValue()).get("userID");
-                System.out.println( ((Map<String, Object>) snapshot.getValue()).get("attemptedRecipes"));
-                User user = new User(senderID, senderEmail, senderName, null); //fix this
-                messageDatabaseRef.push().setValue(new Message(sendMessage, user));
-            }
-            @Override public void onCancelled(FirebaseError error) { }
-        });
+                @Override
+                public void onCancelled(FirebaseError error) {
+                }
+            });
 
-        message.setText("");
+            message.setText("");
+        }
     }
 
 }
