@@ -30,13 +30,38 @@
         </HorizontalScrollView>
     </ScrollView>
 
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView"
-        android:layout_width="match_parent"
+    <!--<AutoCompleteTextView-->
+        <!--android:id="@+id/autoCompleteTextView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="40dp"-->
+        <!--android:layout_weight="0.85"-->
+        <!--android:text="Add or remove ingredient:" />-->
+
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:layout_weight="0.85"
-        android:text="Add or remove ingredient:" />
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:layout_weight="0.21">
+        <!--android:layout_marginBottom="10dp"-->
+
+        <EditText
+            android:id="@+id/ingredientsNumEditText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="Number" />
+
+        <EditText
+            android:layout_margin="10dp"
+            android:hint="Ingredient Name"
+            android:id="@+id/ingredientsTypeEditText"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/LinearLayout02"
@@ -46,7 +71,6 @@
         android:layout_marginTop="0dp"
         android:layout_weight="0.21">
         <!--android:layout_marginBottom="10dp"-->
-
 
         <Button
             android:id="@+id/addButton"
@@ -65,3 +89,4 @@
             android:text="Delete" />
     </LinearLayout>
 </LinearLayout>
+

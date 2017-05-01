@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -21,29 +22,35 @@ import java.util.HashMap;
 public class UserIngredientsActivity extends AppCompatActivity {
     RecipeDatabase rdb;
     TableLayout table;
-    AutoCompleteTextView autoCompleteTextView;
+//    AutoCompleteTextView autoCompleteTextView;
     private ArrayList<String> userIngredients;
+    private ArrayList<String> userIngredientsNum;
+    EditText ingredientsNumEditText;
+    EditText ingredientsTypeEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_ingredients);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, INGREDIENTS);
-        AutoCompleteTextView textView = (AutoCompleteTextView)
-                findViewById(R.id.autoCompleteTextView);
-        textView.setAdapter(adapter);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_dropdown_item_1line, INGREDIENTS);
+//        AutoCompleteTextView textView = (AutoCompleteTextView)
+//                findViewById(R.id.autoCompleteTextView);
+//        textView.setAdapter(adapter);
 
-        autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
+//        autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
         table = (TableLayout) findViewById(R.id.tlGridTable);
         rdb = new RecipeDatabase();     //TODO: get this part done/to work without making RecipeDatabase public
         userIngredients = new ArrayList<String>();
+        userIngredientsNum = new ArrayList<String>();
+        ingredientsNumEditText = (EditText) findViewById(R.id.ingredientsNumEditText);
+        ingredientsTypeEditText = (EditText) findViewById(R.id.ingredientsTypeEditText);
     }
 
-    private static final String[] INGREDIENTS = new String[]{      //TODO: create more autocomplete ingredients
-            "Eggs", "Bacon", "Rice", "Salt", "Pepper", "Olive Oil", "Cheese", "Dough"
-    };
+//    private static final String[] INGREDIENTS = new String[]{      //TODO: create more autocomplete ingredients
+//            "Eggs", "Bacon", "Rice", "Salt", "Pepper", "Olive Oil", "Cheese", "Dough"
+//    };
 
 //    public void searchButtonOnClick(View view) {
 //        ArrayList<Integer> ingredientNumberArrList = new ArrayList<Integer>();
@@ -81,11 +88,13 @@ public class UserIngredientsActivity extends AppCompatActivity {
 //}
 
 
-public ArrayList<String> sort(ArrayList<String> userIngredients) {
+public ArrayList<String> sort(ArrayList<String> userIngredients, ArrayList<String> userIngredientsNum) {
     String tmp;
+    String tmpNum;
     for (int i = 0;i < userIngredients.size();i++)
     {
         tmp = userIngredients.get(i);
+        tmpNum = userIngredients.get(i);
         for (int j = 0;j < userIngredients.size();j++)
         {
             if (i == j) continue;
@@ -93,8 +102,13 @@ public ArrayList<String> sort(ArrayList<String> userIngredients) {
             if (x < 0)
             {
                 tmp = userIngredients.get(j);
+                tmpNum = userIngredientsNum.get(j);
+
                 userIngredients.set(j, userIngredients.get(i));
                 userIngredients.set(i, tmp);
+
+                userIngredientsNum.set(j, userIngredientsNum.get(i));
+                userIngredientsNum.set(i, tmpNum);
             }
         }
     }
@@ -105,15 +119,28 @@ public ArrayList<String> sort(ArrayList<String> userIngredients) {
 //    }
 
     public void addButtonOnClick(View view){
-        String autoCompleteText = autoCompleteTextView.getText().toString();
+//        String autoCompleteText = autoCompleteTextView.getText().toString();
+        String ingredientsNumText = ingredientsNumEditText.getText().toString();
+        String ingredientsTypeText = ingredientsTypeEditText.getText().toString();
+
+        ingredientsNumText = ingredientsNumText.trim();
+        ingredientsTypeText = ingredientsTypeText.trim();
+
 //        Ingredient i = new Ingredient("User", autoCompleteText);
 //        ingre.addRecipeIngredients("User", autoCompleteText);       //add the ingredient to the user ArrayList of ingredients
 
-        if(!(userIngredients.contains(autoCompleteText))){            //only add if ingredient isn't already in there
-            userIngredients.add(autoCompleteText);                    //add ingredient to use ingredient list
+        if(!(userIngredients.contains(ingredientsTypeText))){            //only add if ingredient isn't already in there
+            userIngredients.add(ingredientsTypeText);                    //add ingredient to use ingredient list
+            userIngredientsNum.add(ingredientsNumText);
         }
+//        else{   //else just update the number of that type of ingredient
+//            int index = userIngredients.indexOf(ingredientsTypeText);
+//            String oldIngredientsNumString = userIngredientsNum.get(index);
+////            int oldIngredientsNumInt = oldIngredientsNumString.in
+//            userIngredientsNum.set(index, ingredientsNumText);
+//        } //TODO!
 
-        sort(userIngredients);
+        sort(userIngredients, userIngredientsNum);
 
 
         //now update the table view of the user ingredients
@@ -123,7 +150,7 @@ public ArrayList<String> sort(ArrayList<String> userIngredients) {
         for (int i = 0; i < userIngredients.size(); i++) {           //add back the new table
             TableRow row = new TableRow(this);
 //            Integer iNumInt = ingredientNumberArrList.get(i);
-            String iNameString = userIngredients.get(i);
+            String iNameString = userIngredientsNum.get(i) + " " + userIngredients.get(i);
 
 //            TextView iNumTextView = new TextView(this);
 //            iNumTextView.setText("" + iNumInt.toString());
@@ -138,10 +165,18 @@ public ArrayList<String> sort(ArrayList<String> userIngredients) {
     }
 
     public void deleteButtonOnClick(View view){
-        String autoCompleteText = autoCompleteTextView.getText().toString();
+//        String autoCompleteText = autoCompleteTextView.getText().toString();
+        String ingredientsNumText = ingredientsNumEditText.getText().toString();
+        String ingredientsTypeText = ingredientsTypeEditText.getText().toString();
+
+        ingredientsNumText = ingredientsNumText.trim();
+        ingredientsTypeText = ingredientsTypeText.trim();
+
 //        Ingredient i = new Ingredient("User", autoCompleteText);
-        userIngredients.remove(autoCompleteText);            //delete the ingredient to the user ArrayList of ingredients
-        sort(userIngredients);
+        int index = userIngredients.indexOf(ingredientsTypeText);
+        userIngredients.remove(ingredientsTypeText);            //delete the ingredient to the user ArrayList of ingredients
+        userIngredientsNum.remove(index);
+//        sort(userIngredients, userIngredientsNum);
 
 
 
@@ -153,7 +188,7 @@ public ArrayList<String> sort(ArrayList<String> userIngredients) {
         for (int i = 0; i < userIngredients.size(); i++) {           //add back the new table
             TableRow row = new TableRow(this);
 //            Integer iNumInt = ingredientNumberArrList.get(i);
-            String iNameString = userIngredients.get(i);
+            String iNameString = userIngredientsNum.get(i) + " " + userIngredients.get(i);
 
 //            TextView iNumTextView = new TextView(this);
 //            iNumTextView.setText("" + iNumInt.toString());
@@ -170,4 +205,9 @@ public ArrayList<String> sort(ArrayList<String> userIngredients) {
     public ArrayList<String> getUserIngredients(){
         return userIngredients;
     }
+
+    public ArrayList<String> getUserIngredientsNum(){
+        return userIngredientsNum;
+    }
+
 }
