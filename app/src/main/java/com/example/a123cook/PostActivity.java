@@ -12,6 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +85,12 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
         ////CRITICAL!!!!!!
         ////UPDATED CODE NEEDED HERE TO ADD A NEW PROFILE POST TO A USERS PROFILE!!!!
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        database.getReference().child("users").child(userID).child("attemptedRecipes").push().setValue(recipe);
+
         recipe.updateRating(rating);
         recipe.addComment(thePost);
         Intent profile = new Intent(PostActivity.this, ProfileActivity.class);
