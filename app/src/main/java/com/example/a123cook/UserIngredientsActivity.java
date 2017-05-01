@@ -1,11 +1,13 @@
 package com.example.a123cook;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
@@ -33,13 +35,13 @@ public class UserIngredientsActivity extends AppCompatActivity {
                 findViewById(R.id.autoCompleteTextView);
         textView.setAdapter(adapter);
 
-        autoCompleteTextView = (AutoCompleteTextView)findViewById(R.id.autoCompleteTextView);
+        autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
         table = (TableLayout) findViewById(R.id.tlGridTable);
         rdb = new RecipeDatabase();     //TODO: get this part done/to work without making RecipeDatabase public
         userIngredients = new ArrayList<String>();
     }
 
-    private static final String[] INGREDIENTS = new String[] {      //TODO: create more autocomplete ingredients
+    private static final String[] INGREDIENTS = new String[]{      //TODO: create more autocomplete ingredients
             "Eggs", "Bacon", "Rice", "Salt", "Pepper", "Olive Oil", "Cheese", "Dough"
     };
 
@@ -70,6 +72,13 @@ public class UserIngredientsActivity extends AppCompatActivity {
 //            row.addView(iNameTextView);
 //            table.addView(row);
 //        }
+
+//public void autoCompleteKeyboardOnClick(View view) {
+//    if(view.requestFocus()){
+//        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+//    }
+//}
 
 
 public ArrayList<String> sort(ArrayList<String> userIngredients) {

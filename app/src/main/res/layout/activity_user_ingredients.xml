@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:layout_weight="0.85"
-        android:text="AutoCompleteTextView" />
+        android:text="Add or remove ingredient:" />
 
     <LinearLayout
         android:id="@+id/LinearLayout02"
