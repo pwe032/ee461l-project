@@ -17,8 +17,6 @@ public class User {
     private String email;
     private String name;
     private List<Recipe> attemptedRecipes;
-    private static List<User> userList;
-
     public User() {} //for Firebase data snapshot
 
     public User(FirebaseUser firebaseUser, String name) {
@@ -31,7 +29,6 @@ public class User {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         database.getReference().child("users").child(userID).setValue(this);
         database.getReference().child("users").child(userID).child("attemptedRecipes").push();
-        userList.add(this);
     }
 
     public User(String userID, String email, String name, List<Recipe> attemptedRecipes) { //Datasnapshot
