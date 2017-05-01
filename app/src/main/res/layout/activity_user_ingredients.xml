@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:layout_weight="0.85"
-        android:text="Ingredient to add/remove from pantry:" />
+        android:text="AutoCompleteTextView" />
 
     <LinearLayout
         android:id="@+id/LinearLayout02"
@@ -44,8 +44,9 @@
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="10dp"
         android:layout_weight="0.21">
+        <!--android:layout_marginBottom="10dp"-->
+
 
         <Button
             android:id="@+id/addButton"

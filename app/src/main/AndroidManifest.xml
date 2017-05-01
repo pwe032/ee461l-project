@@ -29,7 +29,8 @@
         <activity
             android:name=".UserIngredientsActivity"
             android:label="@string/title_activity_user_ingredients"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".SearchRecipesActivity" />
     </application>
 

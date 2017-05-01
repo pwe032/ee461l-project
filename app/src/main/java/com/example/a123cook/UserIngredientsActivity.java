@@ -70,6 +70,29 @@ public class UserIngredientsActivity extends AppCompatActivity {
 //            row.addView(iNameTextView);
 //            table.addView(row);
 //        }
+
+
+public ArrayList<String> sort(ArrayList<String> userIngredients) {
+    String tmp;
+    for (int i = 0;i < userIngredients.size();i++)
+    {
+        tmp = userIngredients.get(i);
+        for (int j = 0;j < userIngredients.size();j++)
+        {
+            if (i == j) continue;
+            int x = tmp.compareTo(userIngredients.get(j));
+            if (x < 0)
+            {
+                tmp = userIngredients.get(j);
+                userIngredients.set(j, userIngredients.get(i));
+                userIngredients.set(i, tmp);
+            }
+        }
+    }
+    return userIngredients;
+}
+
+
 //    }
 
     public void addButtonOnClick(View view){
@@ -81,7 +104,10 @@ public class UserIngredientsActivity extends AppCompatActivity {
             userIngredients.add(autoCompleteText);                    //add ingredient to use ingredient list
         }
 
-        //TODO: now update the table view of the user ingredients
+        sort(userIngredients);
+
+
+        //now update the table view of the user ingredients
         table = (TableLayout)findViewById(R.id.tlGridTable);
         table.removeAllViews();                                                 //clear the table
 
@@ -106,12 +132,12 @@ public class UserIngredientsActivity extends AppCompatActivity {
         String autoCompleteText = autoCompleteTextView.getText().toString();
 //        Ingredient i = new Ingredient("User", autoCompleteText);
         userIngredients.remove(autoCompleteText);            //delete the ingredient to the user ArrayList of ingredients
+        sort(userIngredients);
 
 
 
 
-
-        //TODO: now update the table view of the user ingredients
+        //now update the table view of the user ingredients
         table = (TableLayout)findViewById(R.id.tlGridTable);
         table.removeAllViews();                                                 //clear the table
 
