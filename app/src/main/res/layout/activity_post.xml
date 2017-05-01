@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="Make Post here"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:id="@+id/textView8" />
+
+    <EditText android:id="@+id/edit_post"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Post"/>
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:spinnerMode="dropdown" />
+
+    <Button
+        android:id="@+id/buttonFinishPost"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Finish Post!"
+        android:onClick="startRecipeActivity2" />
+</LinearLayout>

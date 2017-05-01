@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Recipe Name"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:id="@+id/textViewRecName" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/editTextRecName" />
+    <TextView
+        android:text="Food Type"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:id="@+id/textViewFoodType" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/editTextFoodType" />
+    <TextView
+        android:text="Difficulty"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:id="@+id/textViewDifficulty" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/editTextDifficulty" />
+    <TextView
+        android:text="Ingredients"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:id="@+id/textViewIngredients" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/editTextIngredients" />
+    <TextView
+        android:text="Instructions"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:id="@+id/textViewInsructions" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/editTextInsructions" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/buttonUploadRec"
+        android:onClick="startUploadActivity"/>
+
+
+</LinearLayout>
