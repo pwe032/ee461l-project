@@ -1,5 +1,7 @@
 package com.example.a123cook;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -14,7 +16,7 @@ public class Recipe implements Serializable{
     public String difficulty;
     public String instructions;
     public String ingredients; //INCLUDES INGREDIENTS
-    public ArrayList<String> comments = new ArrayList<String>();
+    public String comments = "";
 
     public Recipe(){
 
@@ -49,8 +51,15 @@ public class Recipe implements Serializable{
     }
 
     public void addComment(String newComment){
+        comments = comments + newComment + "\n\n\n";
 
-        comments.add(newComment);
+    }
+
+    public static void addRecipeToDB(Recipe rec){
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database.getReference("allRecipes").push().setValue(rec);
+
     }
 
 

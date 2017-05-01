@@ -5,17 +5,21 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
+
+    public Recipe recipe;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
         Intent getRecipe = getIntent(); //receive recipe object from ProfileActivity
-        Recipe recipe = (Recipe)getRecipe.getSerializableExtra("recipeObject");
+        recipe = (Recipe)getRecipe.getSerializableExtra("recipeObject");
         makeDisplay(recipe); //show this recipe
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
@@ -66,6 +70,15 @@ public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
             rating.setImageResource(R.drawable.no_stars);
         }
 
+    }
+
+    public void startPostActivity(View view){
+        EditText editPost = (EditText) findViewById(R.id.edit_post);
+        String comment = editPost.getText().toString();
+        Intent post = new Intent(RecipeActivity.this, PostActivity.class);
+        post.putExtra("newComment", comment);
+        post.putExtra("recToUpdate",recipe);
+        startActivity(post);
     }
 
 }
