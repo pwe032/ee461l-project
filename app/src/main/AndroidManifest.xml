@@ -1,59 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.a123cook">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:label="@string/app_name">
-
-        <activity
-            android:name=".SignInActivity">
+        android:theme="@style/AppTheme">
+        <activity android:name=".SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-               <activity
-            android:name=".AccountActivity">
-        </activity>
-
+        <activity android:name=".AccountActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SignOutActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".RecipeActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ProfileIntroActivity" />
+        <activity android:name=".MessageActivity" />
         <activity
-        android:name=".SignUpActivity">
-        </activity>
-
-        <activity
-            android:name=".SignOutActivity">
-        </activity>
-
-        <activity
-            android:name=".SearchActivity">
-        </activity>
-
-        <activity
-            android:name=".ProfileActivity">
-        </activity>
-
-
-        <activity
-            android:name=".RecipeActivity">
-        </activity>
-
-        <activity
-            android:name=".MainActivity">
-        </activity>
-
-        <activity
-            android:name=".ProfileIntroActivity">
-        </activity>
-
-        <activity
-            android:name=".MessageActivity">
-        </activity>
-
+            android:name=".UserIngredientsActivity"
+            android:label="@string/title_activity_user_ingredients"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SearchRecipesActivity" />
     </application>
+
 </manifest>

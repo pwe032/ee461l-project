@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
 
     public Recipe recipe;
@@ -35,6 +38,7 @@ public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
         TextView ingredients = (TextView) findViewById(R.id.ingredients);
         TextView instructions = (TextView) findViewById(R.id.instructions); // instructions
         TextView difficulty = (TextView) findViewById(R.id.skillLevel); // difficulty
+        TextView comments = (TextView) findViewById(R.id.comments);
 
         //give View components their appropriate values from a Recipe object
         foodName.setText(recipe.name);
@@ -44,6 +48,7 @@ public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
         ingredients.setText(recipe.ingredients);
         instructions.setText(recipe.instructions);
         difficulty.setText(recipe.difficulty);
+        comments.setText(recipe.comments);
 
         //match star image with rating
         if(recipe.rating == 5.0){
@@ -73,10 +78,20 @@ public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
     }
 
     public void startPostActivity(View view){
-        EditText editPost = (EditText) findViewById(R.id.edit_post);
-        String comment = editPost.getText().toString();
+//        EditText editPost = (EditText) findViewById(R.id.edit_post);
+//        String comment = editPost.getText().toString();
+
+
+//        NEED TO GET NAME TOMORROW ASK MINKOO!!!!
+//        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//
+//        database.getReference().child("users").child(userID).
+
+//        comment =  "\n" + comment;
         Intent post = new Intent(RecipeActivity.this, PostActivity.class);
-        post.putExtra("newComment", comment);
+//        post.putExtra("newComment", comment);
         post.putExtra("recToUpdate",recipe);
         startActivity(post);
     }

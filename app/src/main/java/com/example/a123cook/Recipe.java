@@ -40,6 +40,10 @@ public class Recipe implements Serializable{
         this.difficulty = difficulty;
         this.instructions = instructions;
         this.ingredients = ingredients;
+
+        parseIngredients();
+
+        
     }
 
     public void updateRating(double newRating){
@@ -49,6 +53,15 @@ public class Recipe implements Serializable{
         //round to nearest half for half stars
         rating = (Math.round(rating*2))/2;
     }
+
+    public void parseIngredients(){
+        String[] recIng = ingredients.split(" ");
+        ingredients = "";
+        for (int i=0; i < recIng.length; i++){
+            ingredients = ingredients + recIng[i] + "\n";
+        }
+    }
+
 
     public void addComment(String newComment){
         comments = comments + newComment + "\n\n\n";

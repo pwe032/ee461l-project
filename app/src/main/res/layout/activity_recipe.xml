@@ -179,6 +179,18 @@
                 android:layout_marginRight="@dimen/activity_horizontal_margin">
             </TextView>
 
+            <TextView
+                android:id="@+id/comments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@+id/comments"
+                android:textSize="8pt"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin">
+            </TextView>
+
         </LinearLayout>
     </ScrollView>
 

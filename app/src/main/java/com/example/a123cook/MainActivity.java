@@ -69,11 +69,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(search);
                 break;
             case R.id.nav_second_fragment:
-                Intent ingredients = new Intent(this, ProfileIntroActivity.class);
+                Intent ingredients = new Intent(this, UserIngredientsActivity.class);      //MyIngredients
                 startActivity(ingredients);
                 break;
             case R.id.nav_third_fragment:
-                Intent suggestions = new Intent(this, MainActivity.class);
+                Intent suggestions = new Intent(this, SearchRecipesActivity.class);        //SuggestedRecipes
                 startActivity(suggestions);
                 break;
             case R.id.nav_fourth_fragment:

@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public class SearchRecipesActivity extends AppCompatActivity {
     RecipeDatabase rdb;
-    IngredientDB ingre;
+    UserIngredientsActivity userIngreAct;
 
     Spinner foodTypeSpinner;
     Spinner difficultySpinner;
@@ -27,26 +27,29 @@ public class SearchRecipesActivity extends AppCompatActivity {
 
         foodTypeSpinner = (Spinner)findViewById(R.id.foodTypeSpinner);
         difficultySpinner = (Spinner)findViewById(R.id.diffcultySpinner);
-        rdb = new RecipeDatabase();     //TODO: get this part done/to work
-        ingre = new IngredientDB();
+
+        rdb = new RecipeDatabase();     //TODO: get this part done/to work with the actual database
+        userIngreAct = new UserIngredientsActivity();
     }
 
     public double getPercentIngreCompletion(Recipe r){
 
-//        for(Ingredient i : ingre){
-//
-//        }
+        ArrayList<String> userIngredients = userIngreAct.getUserIngredients();
+        if(userIngredients == null){
+            return 0;
+        }
+        ArrayList<String> recipeIngredientsArrList = new ArrayList<String>();
 
-        ArrayList<String> userIngredients = ingre.getUserIngredients();
-        HashMap hMap = ingre.getHashMap();
+        String[] recipeIngredientsStringArr = r.ingredients.split(" ");
 
-        String key = r.name;
-        ArrayList<String> recipeIngredients = hMap.get(key);        //TODO: fix this line
+        for(int i = 0; i < recipeIngredientsStringArr.length; i++){
+            recipeIngredientsArrList.add(recipeIngredientsStringArr[i]);
+        }
 
         double percentage = 0;
-        int numIngredients = recipeIngredients.size();
+        int numIngredients = recipeIngredientsArrList.size();
         for(int i = 0; i < numIngredients; i++){
-            if(userIngredients.contains(recipeIngredients.get(i))){
+            if(userIngredients.contains(recipeIngredientsArrList.get(i))){
                 percentage++;        //increase the percentage if the user has this recipe ingredient
             }
         }
@@ -59,7 +62,7 @@ public class SearchRecipesActivity extends AppCompatActivity {
         //for(Recipe r : recipeSuggestions){
         for(int i = 0; i < recipeSuggestions.size() - 1; i++){
             for(int j = 0; j < recipeSuggestions.size(); j++){
-                if(sortPercentage.get(i) < sortPercentage.get(j)){
+                if(sortPercentage.get(i) > sortPercentage.get(j)){
                     //swap
                     Recipe tempRecipe = recipeSuggestions.get(i);
                     recipeSuggestions.set(i, recipeSuggestions.get(j));
@@ -70,13 +73,12 @@ public class SearchRecipesActivity extends AppCompatActivity {
         return recipeSuggestions;
     }
 
-
-
-
-
     public void searchButtonOnClick(View view) {
         String foodTypeSelection = foodTypeSpinner.getSelectedItem().toString();
         String difficultySelection = difficultySpinner.getSelectedItem().toString();
+
+        System.out.println(foodTypeSelection);      //TODO: delete this testing print statement
+        System.out.println(difficultySelection);    //TODO: delete this testing print statement
 
         ArrayList<Recipe> suggestedRecipes = new ArrayList<Recipe>();
         ArrayList<Double> sortPercentage= new ArrayList<Double>();
@@ -87,19 +89,15 @@ public class SearchRecipesActivity extends AppCompatActivity {
             }
         }
 
-//        suggestedRecipes = sortRecipes(suggestedRecipes);         //sort suggested recpies based on user ingredients
-//        //return suggestedRecipes;
-//        //TODO: launch new window view of suggested recipes in order
-
-
-
-
-
-        //newly added stuff below
         for(Recipe r : suggestedRecipes){
-            sortPercentage.add(getPercentIngreCompletion(r));
+            sortPercentage.add(getPercentIngreCompletion(r));   //get recipe ingredient completion for each recipe
         }
-        suggestedRecipes = sortRecipes(suggestedRecipes, sortPercentage);	//TODO: make sure to link this with sorting the actual recipeSuggestions array list
-        //TODO: call the recipe suggestions display with this recipeSuggestions array list
+        sortRecipes(suggestedRecipes, sortPercentage);	        //TODO: make sure to link this with sorting the actual recipeSuggestions array list
+
+        for(Recipe r : suggestedRecipes){
+            System.out.println(r.name);          //TODO: delete this testing print statement
+        }
+
+        //TODO: call the recipe suggestions display with this recipeSuggestions array list (activity_profile.xml)
     }
 }
