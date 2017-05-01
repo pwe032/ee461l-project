@@ -9,6 +9,7 @@ import android.view.View;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -31,7 +32,10 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
             setContentView(R.layout.activity_post);
             Intent getRecipe = getIntent(); //receive recipe object from RecipeActivity
             recipe = (Recipe)getRecipe.getSerializableExtra("recToUpdate");
-            thePost = (String)getRecipe.getSerializableExtra("newComment");
+
+
+
+//          thePost = (String)getRecipe.getSerializableExtra("newComment");
 
             // Spinner element
             Spinner spinner = (Spinner) findViewById(R.id.spinner1);
@@ -82,6 +86,10 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
     public void startUpdatedProfileActivity(View view){
 
 
+        EditText editPost = (EditText) findViewById(R.id.edit_post);
+        String comment = editPost.getText().toString();
+
+        thePost = rating + "\n" + comment;
 
         ////CRITICAL!!!!!!
         ////UPDATED CODE NEEDED HERE TO ADD A NEW PROFILE POST TO A USERS PROFILE!!!!
