@@ -10,10 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="361dp"
         android:layout_marginTop="5dip"
+        android:layout_weight="0.60"
         android:fillViewport="true"
         android:scrollbarStyle="outsideInset"
-        android:scrollbars="horizontal|vertical"
-        android:layout_weight="0.56">
+        android:scrollbars="horizontal|vertical">
 
         <HorizontalScrollView
             android:id="@+id/horizontalView"
@@ -30,46 +30,36 @@
         </HorizontalScrollView>
     </ScrollView>
 
-    <!--<AutoCompleteTextView-->
-        <!--android:id="@+id/autoCompleteTextView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginBottom="40dp"-->
-        <!--android:layout_weight="0.85"-->
-        <!--android:text="Add or remove ingredient:" />-->
-
     <LinearLayout
         android:id="@+id/LinearLayout01"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="0dp"
-        android:layout_weight="0.21">
-        <!--android:layout_marginBottom="10dp"-->
+        android:layout_weight="0.21"
+        android:weightSum="1">
+
+        <!--<EditText-->
+            <!--android:id="@+id/ingredientsNumEditText"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:hint="Number" />-->
 
         <EditText
-            android:id="@+id/ingredientsNumEditText"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="Number" />
-
-        <EditText
-            android:layout_margin="10dp"
-            android:hint="Ingredient Name"
             android:id="@+id/ingredientsTypeEditText"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:hint="Ingredient Name" />
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/LinearLayout02"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="0dp"
-        android:layout_weight="0.21">
+        android:layout_marginTop="0dp">
         <!--android:layout_marginBottom="10dp"-->
 
         <Button
@@ -77,8 +67,8 @@
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginLeft="40dp"
-            android:text="Add"
-            android:onClick="addButtonOnClick"/>
+            android:onClick="addButtonOnClick"
+            android:text="Add" />
 
         <Button
             android:id="@+id/deleteButton"
@@ -88,5 +78,15 @@
             android:onClick="deleteButtonOnClick"
             android:text="Delete" />
     </LinearLayout>
+
+    <!--<AutoCompleteTextView-->
+        <!--android:id="@+id/autoCompleteTextView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="40dp"-->
+        <!--android:layout_weight="0.85"-->
+        <!--android:text="Add or remove ingredient:" />-->
+
+
 </LinearLayout>
 

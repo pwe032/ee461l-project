@@ -1,13 +1,18 @@
 package com.example.a123cook;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class RecipeDatabase {
 
     private static RecipeDatabase uniqueInstance;
     private static ArrayList<Recipe> allRecipes = new ArrayList<Recipe>();
+//    private ArrayList<Recipe> allRecipes = new ArrayList<Recipe>();
 
     public RecipeDatabase() {
 
@@ -29,7 +34,7 @@ public class RecipeDatabase {
         return uniqueInstance;
     }
 
-    public static ArrayList<Recipe> getAllRecipes() {
+    public static ArrayList<Recipe> getAllRecipes() {       //TODO: change to get the database
         allRecipes.add(new Recipe("Pizza", 1.0, "gn_logo", "Italian", "5", "instr", "ingredients"));
         allRecipes.add(new Recipe("Pasta", 1.0, "gn_logo", "Italian", "5", "instr", "ingredients"));
 

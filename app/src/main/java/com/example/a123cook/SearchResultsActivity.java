@@ -116,8 +116,4 @@ public class SearchResultsActivity extends ListActivity implements Serializable 
                     }
                 });
     }
-
-
-
-
 }

@@ -26,16 +26,20 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ProfileIntroActivity" />
         <activity android:name=".MessageActivity" />
-        <!--<RelativeLayout-->
-            <activity
-                android:name=".UserIngredientsActivity"
-                android:label="@string/title_activity_user_ingredients"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:windowSoftInputMode="adjustResize|stateVisible"
-                android:fitsSystemWindows="true"/>
-            <activity android:name=".SearchRecipesActivity" />
+        <!-- <RelativeLayout -->
+        <activity
+            android:name=".UserIngredientsActivity"
+            android:fitsSystemWindows="true"
+            android:label="@string/title_activity_user_ingredients"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity android:name=".SearchRecipesActivity" />
 
-        <!--</RelativeLayout>-->
+        <!-- </RelativeLayout> -->
+        <activity
+            android:name=".DisplayRecipeSuggestionsActivity"
+            android:label="@string/title_activity_display_recipe_suggestions"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
