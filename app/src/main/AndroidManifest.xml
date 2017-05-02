@@ -75,9 +75,8 @@
                 android:theme="@style/AppTheme.NoActionBar"
                 android:windowSoftInputMode="adjustResize|stateVisible"
                 android:fitsSystemWindows="true"/>
-
-        <activity
-            android:name=".SearchRecipesActivity" />
+        <activity android:name=".DisplayRecipeSuggestionsActivity" />
+        <activity android:name=".SearchRecipesActivity" />
     </application>
 
 </manifest>
