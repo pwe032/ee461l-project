@@ -24,10 +24,11 @@ public class ProfileActivity extends ListActivity{
         super.onCreate(savedInstanceState);
         final ProfileArrayAdapter adapter = new ProfileArrayAdapter(this, recipes);
         setListAdapter(adapter);
-
+        Intent getProfileID = getIntent();
+        String profileID = (String) getProfileID.getSerializableExtra("profileID");
         //read from real-time Firebase database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("allRecipes");
+        DatabaseReference myRef = database.getReference("users").child(profileID).child("attemptedRecipes");
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -64,8 +65,6 @@ public class ProfileActivity extends ListActivity{
         startActivity(profile);
     }
 }
-
-
 
 
 

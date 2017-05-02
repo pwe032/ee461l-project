@@ -1,8 +1,9 @@
 package com.example.a123cook;
 
-import android.net.Uri;
 
+import android.net.Uri;
 import com.google.firebase.auth.FirebaseAuth;
+import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ public class User {
     private String name;
     private Uri photoUri;
     private List<Recipe> attemptedRecipes;
-    private FirebaseDatabase database;
 
     public User() {} //for Firebase data snapshot
 
@@ -31,12 +31,12 @@ public class User {
         this.attemptedRecipes = new ArrayList<Recipe>();
 
         //add to database
-        database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         database.getReference().child("users").child(userID).setValue(this);
         database.getReference().child("users").child(userID).child("attemptedRecipes").push();
     }
 
-    public User(String userID, String email, String name, List<Recipe> attemptedRecipes) {
+    public User(String userID, String email, String name, List<Recipe> attemptedRecipes) { //Datasnapshot
         this.userID = userID;
         this.email = email;
         this.name = name;
@@ -66,6 +66,7 @@ public class User {
 
 
     public void addAttemptedRecipe(Recipe attemptedRecipe) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         attemptedRecipes.add(attemptedRecipe);
         database.getReference().child("users").child(userID).child("attemptedRecipes").push().setValue(attemptedRecipe);
         //make change to database
