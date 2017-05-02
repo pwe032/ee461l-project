@@ -35,7 +35,7 @@ public class RecipeDatabase {
     }
 
     public static ArrayList<Recipe> getAllRecipes() {       //TODO: change to get the database
-        allRecipes.add(new Recipe("Pizza", 1.0, "gn_logo", "Italian", "5", "instr", "ingredients"));
+        allRecipes.add(new Recipe("Pizza", 1.0, "gn_logo", "Italian", "5", "instr", "ingredients2"));
         allRecipes.add(new Recipe("Pasta", 1.0, "gn_logo", "Italian", "5", "instr", "ingredients"));
 
         allRecipes.add(new Recipe("Sushi Rolls", 2.0, "mkp_logo", "Japanese", "5", "instr", "ingredients"));

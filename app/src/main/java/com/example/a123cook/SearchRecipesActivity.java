@@ -26,7 +26,7 @@ import java.util.Iterator;
  */
 
 public class SearchRecipesActivity extends AppCompatActivity {
-    RecipeDatabase rdb;
+//    RecipeDatabase rdb;
     UserIngredientsActivity userIngreAct;
 
     Spinner foodTypeSpinner;
@@ -42,7 +42,7 @@ public class SearchRecipesActivity extends AppCompatActivity {
         foodTypeSpinner = (Spinner)findViewById(R.id.foodTypeSpinner);
         difficultySpinner = (Spinner)findViewById(R.id.diffcultySpinner);
 
-        rdb = new RecipeDatabase();     //TODO: get this part done/to work with the actual database
+//        rdb = new RecipeDatabase();     //TODO: get this part done/to work with the actual database
         userIngreAct = new UserIngredientsActivity();
 
 
@@ -51,58 +51,34 @@ public class SearchRecipesActivity extends AppCompatActivity {
 
 
 
-//        allRecipes = new ArrayList<Recipe>();
+        allRecipes = new ArrayList<Recipe>();
 
 
-//        FirebaseDatabase.getInstance().getReference().child("allRecipes").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for(DataSnapshot recipe : dataSnapshot.getChildren()){
-//                    allRecipes.add((Recipe) recipe.getValue());             //populates on start of activity
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-
-
-
-//        FirebaseDatabase.getInstance()
-//                .getReference()
-//                .child("myRecipes")
-//                .addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        Iterator<DataSnapshot> dataSnapshots = dataSnapshot.getChildren()
-//                                .iterator();
-//                        allRecipes = new ArrayList<>();
-//                        while (dataSnapshots.hasNext()) {
-//                            DataSnapshot dataSnapshotChild = dataSnapshots.next();
-//                            User user = dataSnapshotChild.getValue(User.class);
-//                            if (!TextUtils.equals(user.getUserID(),
-//                                    FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-//                                allRecipes.add(user);
-//                            }
-//                        }
-//                        // All users are retrieved except the one who is currently logged
-//                        // in device.
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//                        // Unable to retrieve the users.
-//                    }
-//                });
+        //TODO: from http://stackoverflow.com/questions/40366717/firebase-for-android-how-can-i-loop-through-a-child-for-each-child-x-do-y
+        FirebaseDatabase.getInstance().getReference().child("allRecipes")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Recipe recipe = snapshot.getValue(Recipe.class);
+                            if(!(allRecipes.contains(recipe))){
+                                allRecipes.add(recipe);                     //don't all duplicates
+                                System.out.println(recipe.name);
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
 
 
 //        System.out.println("All of the recipes in the database: ");
-//        for(Recipe r : allRecipes){
-//            System.out.println(r.name);
-//        }
-
+////        for(Recipe r : allRecipes){
+////            System.out.println(r.name);
+////        }
+//        System.out.println(allRecipes.get(0).name);
+//        System.out.println(allRecipes.get(1).name);
 
 
 
@@ -118,17 +94,36 @@ public class SearchRecipesActivity extends AppCompatActivity {
 
     public double getPercentIngreCompletion(Recipe r){
 
-        ArrayList<String> userIngredients = userIngreAct.getUserIngredients();
+        ArrayList<String> userIngredients = new ArrayList<String>();// = userIngreAct.getUserIngredients();
+
+        if(r.name.equals("Pasta")){
+            userIngredients.add("ingredients");
+        }
+        else{
+            userIngredients.add("random");
+        }
+
         if(userIngredients == null){
             return 0;
         }
         ArrayList<String> recipeIngredientsArrList = new ArrayList<String>();
 
-        String[] recipeIngredientsStringArr = r.ingredients.split(" ");
+//        String temp = "ingredients ins";
+        String[] recipeIngredientsStringArr = {"ingredients", "ins"};// r.ingredients.split(" ");
+        System.out.println("String[]: ");
+        System.out.println("Length: " + recipeIngredientsStringArr.length);
+        System.out.println("Should be ingredients: " + recipeIngredientsStringArr[0]);
+        System.out.println("Should be ins: " + recipeIngredientsStringArr[1]);        //TODO: delete testing print statements
+
 
         for(int i = 0; i < recipeIngredientsStringArr.length; i++){
             recipeIngredientsArrList.add(recipeIngredientsStringArr[i]);
         }
+
+        System.out.println("ArrayList<String>: ");
+        System.out.println("Should be ingredients: " + recipeIngredientsArrList.get(0));
+        System.out.println("Should be ins: " + recipeIngredientsArrList.get(1));        //TODO: delete testing print statements
+
 
         double percentage = 0;
         int numIngredients = recipeIngredientsArrList.size();
@@ -138,6 +133,7 @@ public class SearchRecipesActivity extends AppCompatActivity {
             }
         }
         percentage = percentage / numIngredients;
+        System.out.println("Percentage: " + percentage);        //TODO: delete testing print statement
         return percentage;
     }
 
@@ -146,7 +142,7 @@ public class SearchRecipesActivity extends AppCompatActivity {
         //for(Recipe r : recipeSuggestions){
         for(int i = 0; i < recipeSuggestions.size() - 1; i++){
             for(int j = 0; j < recipeSuggestions.size(); j++){
-                if(sortPercentage.get(i) > sortPercentage.get(j)){
+                if(sortPercentage.get(i) < sortPercentage.get(j)){
                     //swap
                     Recipe tempRecipe = recipeSuggestions.get(i);
                     recipeSuggestions.set(i, recipeSuggestions.get(j));
@@ -157,9 +153,9 @@ public class SearchRecipesActivity extends AppCompatActivity {
         return recipeSuggestions;
     }
 
-//    public ArrayList<Recipe> getAllRecipes(){
-//        return allRecipes;
-//    }
+    public ArrayList<Recipe> getAllRecipes(){
+        return allRecipes;
+    }
 
 
     public void searchButtonOnClick() {
@@ -178,24 +174,30 @@ public class SearchRecipesActivity extends AppCompatActivity {
         ArrayList<Double> sortPercentage= new ArrayList<Double>();
 
         //TODO: change the rdb.getAllRecipes() below
-        for (Recipe r : rdb.getAllRecipes()) {                    //get all recipes that match user selections
+        for (Recipe r : getAllRecipes()) {                    //get all recipes that match user selections
             if (foodTypeSelection.equals(r.foodType) && difficultySelection.equals(r.difficulty)) {
-                suggestedRecipes.add(r);
+                if(!(suggestedRecipes.contains(r))){          //don't add duplicates
+                    suggestedRecipes.add(r);
+                }
             }
         }
 
-        for(Recipe r : suggestedRecipes){
-            sortPercentage.add(getPercentIngreCompletion(r));   //get recipe ingredient completion for each recipe
-        }
-        suggestedRecipes = sortRecipes(suggestedRecipes, sortPercentage);	        //TODO: make sure to link this with sorting the actual recipeSuggestions array list
+        if(suggestedRecipes.size() > 1) {       //TODO: make sure lists of 1 recipe don't show twice in next activity
+            for (Recipe r : suggestedRecipes) {
+                sortPercentage.add(getPercentIngreCompletion(r));   //get recipe ingredient completion for each recipe
+            }
 
+            System.out.println("Percentages stored: ");
+            for(Double d : sortPercentage){
+                System.out.println(d);           //TODO: delete this testing print statement
+            }
+            suggestedRecipes = sortRecipes(suggestedRecipes, sortPercentage);            //TODO: make sure to link this with sorting the actual recipeSuggestions array list
+        }
 
         System.out.println("All of the suggested recipes:" );
         for(Recipe r : suggestedRecipes){
             System.out.println(r.name);          //TODO: delete this testing print statement
         }
-
-//        suggestedRecipes.add(new Recipe("Pizza", 1.0, "gn_logo", "Italian", "5", "instr", "ingredients"));  //TODO: delete this testing
 
         //TODO: call the recipe suggestions display with this recipeSuggestions array list (activity_profile.xml)
         Intent displayRecipeSuggestions = new Intent(this, DisplayRecipeSuggestionsActivity.class);

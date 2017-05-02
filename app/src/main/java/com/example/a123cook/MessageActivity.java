@@ -71,7 +71,7 @@ public class MessageActivity extends AppCompatActivity {
                     String senderEmail = (String) ((Map<String, Object>) snapshot.getValue()).get("email");
                     String senderID = (String) ((Map<String, Object>) snapshot.getValue()).get("userID");
                     System.out.println(((Map<String, Object>) snapshot.getValue()).get("attemptedRecipes"));
-                    User user = new User(senderID, senderEmail, senderName, null); //fix this
+                    User user = new User(senderID, senderEmail, senderName, null, null); //fix this
                     messageDatabaseRef.push().setValue(new Message(sendMessage, user));
                 }
 

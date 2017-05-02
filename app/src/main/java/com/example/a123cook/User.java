@@ -18,12 +18,14 @@ public class User {
     private String name;
     private List<Recipe> attemptedRecipes;
     public User() {} //for Firebase data snapshot
+    private ArrayList<String> userIngredients;
 
     public User(FirebaseUser firebaseUser, String name) {
         this.userID = firebaseUser.getUid();
         this.email = firebaseUser.getEmail();
         this.name = name;
         this.attemptedRecipes = new ArrayList<Recipe>();
+        this.userIngredients = new ArrayList<String>();
 
         //add to database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -31,11 +33,12 @@ public class User {
         database.getReference().child("users").child(userID).child("attemptedRecipes").push();
     }
 
-    public User(String userID, String email, String name, List<Recipe> attemptedRecipes) { //Datasnapshot
+    public User(String userID, String email, String name, List<Recipe> attemptedRecipes, ArrayList<String> userIngredients) { //Datasnapshot
         this.userID = userID;
         this.email = email;
         this.name = name;
         this.attemptedRecipes = attemptedRecipes;
+        this.userIngredients = userIngredients;
     }
 
     public String getName() {
