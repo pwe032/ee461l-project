@@ -5,17 +5,24 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
+
+    public Recipe recipe;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
         Intent getRecipe = getIntent(); //receive recipe object from ProfileActivity
-        Recipe recipe = (Recipe)getRecipe.getSerializableExtra("recipeObject");
+        recipe = (Recipe)getRecipe.getSerializableExtra("recipeObject");
         makeDisplay(recipe); //show this recipe
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
@@ -31,6 +38,7 @@ public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
         TextView ingredients = (TextView) findViewById(R.id.ingredients);
         TextView instructions = (TextView) findViewById(R.id.instructions); // instructions
         TextView difficulty = (TextView) findViewById(R.id.skillLevel); // difficulty
+        TextView comments = (TextView) findViewById(R.id.comments);
 
         //give View components their appropriate values from a Recipe object
         foodName.setText(recipe.name);
@@ -40,6 +48,7 @@ public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
         ingredients.setText(recipe.ingredients);
         instructions.setText(recipe.instructions);
         difficulty.setText(recipe.difficulty);
+        comments.setText(recipe.comments);
 
         //match star image with rating
         if(recipe.rating == 5.0){
@@ -66,6 +75,12 @@ public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
             rating.setImageResource(R.drawable.no_stars);
         }
 
+    }
+
+    public void startPostActivity(View view){
+        Intent post = new Intent(RecipeActivity.this, PostActivity.class);
+        post.putExtra("recToUpdate",recipe);
+        startActivity(post);
     }
 
 }

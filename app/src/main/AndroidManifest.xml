@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.a123cook">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:label="@string/app_name">
+        android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".SignInActivity">
+        <activity android:name=".SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-               <activity
+        <activity
             android:name=".AccountActivity">
+        </activity>
+
+        <activity
+            android:name=".PostActivity">
         </activity>
 
         <activity
@@ -52,6 +57,10 @@
         </activity>
 
         <activity
+            android:name=".MakeRecipeActivity">
+        </activity>
+
+        <activity
             android:name=".ProfileIntroActivity">
         </activity>
 
@@ -59,5 +68,16 @@
             android:name=".MessageActivity">
         </activity>
 
+        <activity
+                android:name=".UserIngredientsActivity"
+                android:label="@string/title_activity_user_ingredients"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:windowSoftInputMode="adjustResize|stateVisible"
+                android:fitsSystemWindows="true"/>
+
+        <activity
+            android:name=".SearchRecipesActivity" />
+
     </application>
+
 </manifest>

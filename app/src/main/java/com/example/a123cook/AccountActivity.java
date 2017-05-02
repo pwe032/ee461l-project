@@ -39,7 +39,7 @@ public class AccountActivity extends MainActivity{
         updateName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeName();
+                    changeName();
             }
         });
 
@@ -67,6 +67,7 @@ public class AccountActivity extends MainActivity{
                         }
                     }
                 });
+        editName.getText().clear();
     }
 
     public void changeEmail(){
@@ -81,6 +82,6 @@ public class AccountActivity extends MainActivity{
                         }
                     }
                 });
+        editEmail.getText().clear();
     }
-
 }

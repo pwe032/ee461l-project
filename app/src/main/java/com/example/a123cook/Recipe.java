@@ -1,5 +1,7 @@
 package com.example.a123cook;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -14,7 +16,7 @@ public class Recipe implements Serializable{
     public String difficulty;
     public String instructions;
     public String ingredients; //INCLUDES INGREDIENTS
-    public ArrayList<String> comments = new ArrayList<String>();
+    public String comments = "";
 
     public Recipe(){
 
@@ -26,6 +28,7 @@ public class Recipe implements Serializable{
         this.difficulty = "n/a";
         this.instructions ="n/a";
         this.ingredients = "n/a";
+        this.comments="";
     }
 
     public Recipe(String name, double rating, String imgUrl,String foodType, String difficulty, String instructions, String ingredients){
@@ -38,6 +41,10 @@ public class Recipe implements Serializable{
         this.difficulty = difficulty;
         this.instructions = instructions;
         this.ingredients = ingredients;
+        this.comments = "";
+        parseIngredients();
+
+        
     }
 
     public void updateRating(double newRating){
@@ -48,11 +55,26 @@ public class Recipe implements Serializable{
         rating = (Math.round(rating*2))/2;
     }
 
-    public void addComment(String newComment){
-
-        comments.add(newComment);
+    public void parseIngredients(){
+        String[] recIng = ingredients.split(" ");
+        ingredients = "";
+        for (int i=0; i < recIng.length; i++){
+            ingredients = ingredients + recIng[i] + "\n";
+        }
     }
 
+
+    public void addComment(String newComment){
+        comments = comments + newComment + "\n\n\n";
+
+    }
+
+    public static void addRecipeToDB(Recipe rec){
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database.getReference("allRecipes").push().setValue(rec);
+
+    }
 
 
 }
