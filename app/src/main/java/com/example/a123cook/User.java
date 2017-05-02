@@ -1,9 +1,11 @@
 package com.example.a123cook;
 
+
+import android.net.Uri;
+import com.google.firebase.auth.FirebaseAuth;
 import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +18,9 @@ public class User {
     private String userID;
     private String email;
     private String name;
+    private Uri photoUri;
     private List<Recipe> attemptedRecipes;
+
     public User() {} //for Firebase data snapshot
     private ArrayList<String> userIngredients;
 
@@ -24,6 +28,7 @@ public class User {
         this.userID = firebaseUser.getUid();
         this.email = firebaseUser.getEmail();
         this.name = name;
+        this.photoUri = firebaseUser.getPhotoUrl();
         this.attemptedRecipes = new ArrayList<Recipe>();
         this.userIngredients = new ArrayList<String>();
 
@@ -48,6 +53,10 @@ public class User {
     public String getEmail() {
         return email;
     }
+
+    public Uri getPhotoUri(){return photoUri;}
+
+    public void setPhotoUri(Uri uri){photoUri = uri;}
 
     public List<Recipe> getAttemptedRecipes() {
         return attemptedRecipes;

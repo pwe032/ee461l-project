@@ -10,6 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,29 +18,66 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AccountActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".SignOutActivity" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".RecipeActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ProfileIntroActivity" />
-        <activity android:name=".MessageActivity" />
-        <!-- <RelativeLayout -->
-        <activity
-            android:name=".UserIngredientsActivity"
-            android:fitsSystemWindows="true"
-            android:label="@string/title_activity_user_ingredients"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize|stateVisible" />
-        <activity android:name=".SearchRecipesActivity" />
 
-        <!-- </RelativeLayout> -->
+
         <activity
-            android:name=".DisplayRecipeSuggestionsActivity"
-            android:label="@string/title_activity_display_recipe_suggestions"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".AccountActivity">
+        </activity>
+
+        <activity
+            android:name=".PostActivity">
+        </activity>
+
+        <activity
+        android:name=".SignUpActivity">
+        </activity>
+
+        <activity
+            android:name=".SignOutActivity">
+        </activity>
+
+        <activity
+            android:name=".SearchActivity">
+        </activity>
+
+        <activity
+            android:name=".SearchResultsActivity">
+        </activity>
+
+        <activity
+            android:name=".ProfileActivity">
+        </activity>
+
+
+        <activity
+            android:name=".RecipeActivity">
+        </activity>
+
+        <activity
+            android:name=".MainActivity">
+        </activity>
+
+        <activity
+            android:name=".MakeRecipeActivity">
+        </activity>
+
+        <activity
+            android:name=".ProfileIntroActivity">
+        </activity>
+
+        <activity
+            android:name=".MessageActivity">
+        </activity>
+
+        <activity
+                android:name=".UserIngredientsActivity"
+                android:label="@string/title_activity_user_ingredients"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:windowSoftInputMode="adjustResize|stateVisible"
+                android:fitsSystemWindows="true"/>
+
+        <activity
+            android:name=".SearchRecipesActivity" />
     </application>
 
 </manifest>

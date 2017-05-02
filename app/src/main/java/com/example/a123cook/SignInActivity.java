@@ -146,7 +146,11 @@ public class SignInActivity extends AppCompatActivity {
     //--------Event-handling Methods--------//
     public void onValidSignIn() {
         finish();
-        startActivity(new Intent(SignInActivity.this, ProfileIntroActivity.class));
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String ID = user.getUid();
+        Intent profile = new Intent(SignInActivity.this, ProfileActivity.class);
+        profile.putExtra("profileID", ID);
+        startActivity(profile);
     }
 
     public void onInvalidSignIn() {

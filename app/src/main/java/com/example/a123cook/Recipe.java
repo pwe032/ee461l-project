@@ -28,6 +28,7 @@ public class Recipe implements Serializable{
         this.difficulty = "n/a";
         this.instructions ="n/a";
         this.ingredients = "n/a";
+        this.comments="";
     }
 
     public Recipe(String name, double rating, String imgUrl,String foodType, String difficulty, String instructions, String ingredients){
@@ -40,7 +41,7 @@ public class Recipe implements Serializable{
         this.difficulty = difficulty;
         this.instructions = instructions;
         this.ingredients = ingredients;
-
+        this.comments = "";
         parseIngredients();
 
         

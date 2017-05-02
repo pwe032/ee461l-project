@@ -30,12 +30,8 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_post);
-            Intent getRecipe = getIntent(); //receive recipe object from RecipeActivity
-            recipe = (Recipe)getRecipe.getSerializableExtra("recToUpdate");
-
-
-
-//          thePost = (String)getRecipe.getSerializableExtra("newComment");
+            Intent fetchRecipe = getIntent(); //receive recipe object from RecipeActivity
+            recipe = (Recipe)fetchRecipe.getSerializableExtra("recToUpdate");
 
             // Spinner element
             Spinner spinner = (Spinner) findViewById(R.id.spinner1);
@@ -84,24 +80,19 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void startUpdatedProfileActivity(View view){
-
-
         EditText editPost = (EditText) findViewById(R.id.edit_post);
         String comment = editPost.getText().toString();
-
         thePost = rating + "\n" + comment;
-
+        recipe.updateRating(rating);
+        recipe.addComment(thePost);
         ////CRITICAL!!!!!!
         ////UPDATED CODE NEEDED HERE TO ADD A NEW PROFILE POST TO A USERS PROFILE!!!!
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-
         database.getReference().child("users").child(userID).child("attemptedRecipes").push().setValue(recipe);
 
-        recipe.updateRating(rating);
-        recipe.addComment(thePost);
-        Intent profile = new Intent(PostActivity.this, ProfileActivity.class);
+        Intent profile = new Intent(PostActivity.this, RecipeActivity.class);
+        profile.putExtra("recipeObject",recipe);
         startActivity(profile);
     }
 
