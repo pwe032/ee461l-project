@@ -1,6 +1,8 @@
 package com.example.a123cook;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -26,7 +28,7 @@ import java.util.Map;
  * By: Gaurav Nagar
  * Date: 4/29/17
  */
-public class MessageActivity extends AppCompatActivity {
+public class MessageActivity extends MainActivity {
 
     private FirebaseListAdapter<Message> adapter;
     private Firebase database;
@@ -39,7 +41,9 @@ public class MessageActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
-
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        setupDrawerContent(nvDrawer);
         Firebase.setAndroidContext(this);
 
         message = (EditText) findViewById(R.id.message_text);

@@ -3,7 +3,9 @@ package com.example.a123cook;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -27,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class UserIngredientsActivity extends AppCompatActivity {
+public class UserIngredientsActivity extends MainActivity {
     RecipeDatabase rdb;
     TableLayout table;
     private ArrayList<String> userIngredients;
@@ -37,6 +39,9 @@ public class UserIngredientsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_ingredients);
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        setupDrawerContent(nvDrawer);
         table = (TableLayout) findViewById(R.id.tlGridTable);
         rdb = new RecipeDatabase();     //TODO: get this part done/to work without making RecipeDatabase public
         userIngredients = new ArrayList<String>();
