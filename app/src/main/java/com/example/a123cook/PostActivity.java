@@ -30,7 +30,8 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
         private double rating;
         private Recipe recipe;
         private String thePost;
-        private ArrayList<Recipe> allRec;
+        private String Name;
+        private ArrayList<Recipe> allAttemptedRecipes;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
             setContentView(R.layout.activity_post);
             Intent getRecipe = getIntent(); //receive recipe object from RecipeActivity
             recipe = (Recipe)getRecipe.getSerializableExtra("recToUpdate");
-
+            String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
 //          thePost = (String)getRecipe.getSerializableExtra("newComment");
@@ -71,6 +72,39 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
             // attaching data adapter to spinner
             spinner.setAdapter(dataAdapter);
+
+            allAttemptedRecipes = new ArrayList<Recipe>();
+            //TODO: from http://stackoverflow.com/questions/40366717/firebase-for-android-how-can-i-loop-through-a-child-for-each-child-x-do-y
+            FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("attemptedRecipes")
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                Recipe recipe = snapshot.getValue(Recipe.class);
+                                if(!(allAttemptedRecipes.contains(recipe))){
+                                    allAttemptedRecipes.add(recipe);                     //don't all duplicates
+                                    //System.out.println(recipe.name);
+                                }
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+
+            FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("name").
+                    addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Name = (String) dataSnapshot.getValue();
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
         }
 
         @Override
@@ -91,22 +125,20 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void startUpdatedProfileActivity(View view){
 
-
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         EditText editPost = (EditText) findViewById(R.id.edit_post);
         String comment = editPost.getText().toString();
 
-        thePost = rating + "\n" + comment;
+        thePost = Name + " rated this recipe: " + rating + "\n" + comment;
 
         ////CRITICAL!!!!!!
         ////UPDATED CODE NEEDED HERE TO ADD A NEW PROFILE POST TO A USERS PROFILE!!!!
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
 
-
-
-        database.getReference().child("users").child(userID).child("attemptedRecipes").push().setValue(recipe);
+        if (!allAttemptedRecipes.contains(recipe)) {
+            database.getReference().child("users").child(userID).child("attemptedRecipes").push().setValue(recipe);
+        }
 
 
         recipe.updateRating(rating);

@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
 
     public Recipe recipe;
-    public boolean source;
+    public String previousActivity;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -24,12 +24,12 @@ public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
 
         setContentView(R.layout.activity_recipe);
         Intent getRecipe = getIntent(); //receive recipe object from ProfileActivity
-        String activity = (String)getRecipe.getSerializableExtra("check");
+        previousActivity = (String)getRecipe.getSerializableExtra("check");
 
-        if (activity.equals("ProfileActivity") || activity.equals("PostActivity")){
+        if (previousActivity.equals("ProfileActivity") || previousActivity.equals("PostActivity")){
             recipe = (Recipe)getRecipe.getSerializableExtra("recipeObject");
         }
-        else if(activity.equals("SearchRecipeActivity")){
+        else if(previousActivity.equals("SearchRecipesActivity")){
             recipe = (Recipe)getRecipe.getSerializableExtra("recipeObject2");
         }
 
@@ -104,6 +104,20 @@ public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
 //        post.putExtra("newComment", comment);
         post.putExtra("recToUpdate",recipe);
         startActivity(post);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (previousActivity.equals("ProfileActivity") || previousActivity.equals("PostActivity")) {
+            Intent previous = new Intent(RecipeActivity.this, ProfileActivity.class);
+            startActivity(previous);
+        }
+        else if(previousActivity.equals("SearchRecipesActivity")){
+            Intent previous = new Intent(RecipeActivity.this, ProfileActivity.class);
+            startActivity(previous);
+        }
+
     }
 
 }

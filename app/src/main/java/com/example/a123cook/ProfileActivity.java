@@ -23,6 +23,10 @@ public class ProfileActivity extends ListActivity{
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        ArrayList <Recipe> reversedRecipes;
+        reversedRecipes = reverse(recipes);
+
         final ProfileArrayAdapter adapter = new ProfileArrayAdapter(this, recipes);
         setListAdapter(adapter);
         Intent getProfileID = getIntent();
@@ -34,7 +38,8 @@ public class ProfileActivity extends ListActivity{
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Recipe rec = dataSnapshot.getValue(Recipe.class);
-                adapter.add(rec);
+//                adapter.add(rec);
+                adapter.insert(rec,0);
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
@@ -64,8 +69,24 @@ public class ProfileActivity extends ListActivity{
         Intent profile = new Intent(ProfileActivity.this, RecipeActivity.class);
         profile.putExtra("recipeObject", recipe);
         profile.putExtra("check", "ProfileActivity");
+
+//      Intent recResults = new Intent(SearchRecipesActivity.this, RecipeActivity.class);
+//      recResults.putExtra("recipeObject2", recipe);
+//      profile.putExtra("check", "SearchRecipesActivity" );
+
         startActivity(profile);
     }
+
+    public ArrayList<Recipe> reverse(ArrayList<Recipe> recipes){
+        ArrayList<Recipe> reversedList = new ArrayList<Recipe>();
+        int size = recipes.size();
+        for (int i=0; i< recipes.size(); i++) {
+            reversedList.add(recipes.get(size-1-i));
+        }
+
+        return reversedList;
+    }
+
 }
 
 
