@@ -1,6 +1,8 @@
 package com.example.a123cook;
 
 import android.content.Intent;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,7 +27,7 @@ import java.util.Iterator;
  * Created by Michelle on 4/25/2017.
  */
 
-public class SearchRecipesActivity extends AppCompatActivity {
+public class SearchRecipesActivity extends MainActivity {
 //    RecipeDatabase rdb;
 //    UserIngredientsActivity userIngreAct;
 
@@ -39,7 +41,9 @@ public class SearchRecipesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_recipes);
-
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        setupDrawerContent(nvDrawer);
         foodTypeSpinner = (Spinner)findViewById(R.id.foodTypeSpinner);
         difficultySpinner = (Spinner)findViewById(R.id.diffcultySpinner);
 

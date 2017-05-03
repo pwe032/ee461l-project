@@ -3,6 +3,8 @@ package com.example.a123cook;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +26,9 @@ public class AccountActivity extends MainActivity{
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        setupDrawerContent(nvDrawer);
         user = FirebaseAuth.getInstance().getCurrentUser();
         TextView accountName = (TextView)findViewById(R.id.AccountName);
         TextView accountEmail = (TextView)findViewById(R.id.AccountEmail);
