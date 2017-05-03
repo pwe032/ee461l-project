@@ -24,7 +24,7 @@ public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
 
         setContentView(R.layout.activity_recipe);
         Intent getRecipe = getIntent(); //receive recipe object from ProfileActivity
-        String activity = getRecipe.getStringExtra("activity");
+        String activity = (String)getRecipe.getSerializableExtra("check");
 
         if (activity.equals("ProfileActivity") || activity.equals("PostActivity")){
             recipe = (Recipe)getRecipe.getSerializableExtra("recipeObject");
