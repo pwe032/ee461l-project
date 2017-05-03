@@ -36,6 +36,8 @@ public class User {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         database.getReference().child("users").child(userID).setValue(this);
         database.getReference().child("users").child(userID).child("attemptedRecipes").push();
+        database.getReference().child("users").child(userID).child("userIngredients").push();
+
     }
 
     public User(String userID, String email, String name, List<Recipe> attemptedRecipes, ArrayList<String> userIngredients) { //Datasnapshot
@@ -72,6 +74,13 @@ public class User {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         attemptedRecipes.add(attemptedRecipe);
         database.getReference().child("users").child(userID).child("attemptedRecipes").push().setValue(attemptedRecipe);
+        //make change to database
+    }
+
+    public void addUserIngredients(String userIngredient) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        userIngredients.add(userIngredient);
+        database.getReference().child("users").child(userID).child("userIngredients").push().setValue(userIngredient);
         //make change to database
     }
 }

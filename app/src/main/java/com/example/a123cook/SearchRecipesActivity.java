@@ -27,12 +27,13 @@ import java.util.Iterator;
 
 public class SearchRecipesActivity extends AppCompatActivity {
 //    RecipeDatabase rdb;
-    UserIngredientsActivity userIngreAct;
+//    UserIngredientsActivity userIngreAct;
 
     Spinner foodTypeSpinner;
     Spinner difficultySpinner;
 
     private static ArrayList<Recipe> allRecipes;
+    private static ArrayList<String> userIngredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +44,9 @@ public class SearchRecipesActivity extends AppCompatActivity {
         difficultySpinner = (Spinner)findViewById(R.id.diffcultySpinner);
 
 //        rdb = new RecipeDatabase();     //TODO: get this part done/to work with the actual database
-        userIngreAct = new UserIngredientsActivity();
-
-
-
-
-
-
+//        userIngreAct = new UserIngredientsActivity();
 
         allRecipes = new ArrayList<Recipe>();
-
-
         //TODO: from http://stackoverflow.com/questions/40366717/firebase-for-android-how-can-i-loop-through-a-child-for-each-child-x-do-y
         FirebaseDatabase.getInstance().getReference().child("allRecipes")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -72,6 +65,25 @@ public class SearchRecipesActivity extends AppCompatActivity {
                     }
                 });
 
+        userIngredients = new ArrayList<String>();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("userIngredients")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String ingredient = (String) snapshot.getValue();
+                            if(!(userIngredients.contains(ingredient))){
+                                userIngredients.add(ingredient);                     //don't all duplicates
+                                System.out.println(ingredient);
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
 
 //        System.out.println("All of the recipes in the database: ");
 ////        for(Recipe r : allRecipes){
@@ -94,28 +106,28 @@ public class SearchRecipesActivity extends AppCompatActivity {
 
     public double getPercentIngreCompletion(Recipe r){
 
-        ArrayList<String> userIngredients = new ArrayList<String>();// = userIngreAct.getUserIngredients();
+//        ArrayList<String> userIngredients = new ArrayList<String>();// = userIngreAct.getUserIngredients();
+//
+//        if(r.name.equals("Pasta")){
+//            userIngredients.add("ingredients");
+//        }
+//        else{
+//            userIngredients.add("random");
+//        }
 
-        if(r.name.equals("Pasta")){
-            userIngredients.add("ingredients");
-        }
-        else{
-            userIngredients.add("random");
-        }
-
-        if(userIngredients == null){
+        if(userIngredients == null){        //user doesn't have any ingredients
             return 0;
         }
-        ArrayList<String> recipeIngredientsArrList = new ArrayList<String>();
 
+        String[] recipeIngredientsStringArr = r.ingredients.split(" ");
 //        String temp = "ingredients ins";
-        String[] recipeIngredientsStringArr = {"ingredients", "ins"};// r.ingredients.split(" ");
+//        String[] recipeIngredientsStringArr = {"ingredients", "ins"};// r.ingredients.split(" ");
         System.out.println("String[]: ");
         System.out.println("Length: " + recipeIngredientsStringArr.length);
-        System.out.println("Should be ingredients: " + recipeIngredientsStringArr[0]);
-        System.out.println("Should be ins: " + recipeIngredientsStringArr[1]);        //TODO: delete testing print statements
+//        System.out.println("Should be ingredients: " + recipeIngredientsStringArr[0]);
+//        System.out.println("Should be ins: " + recipeIngredientsStringArr[1]);        //TODO: delete testing print statements
 
-
+        ArrayList<String> recipeIngredientsArrList = new ArrayList<String>();
         for(int i = 0; i < recipeIngredientsStringArr.length; i++){
             recipeIngredientsArrList.add(recipeIngredientsStringArr[i]);
         }
