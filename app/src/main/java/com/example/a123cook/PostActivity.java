@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 
 import android.widget.AdapterView;
@@ -14,10 +15,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class PostActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -25,13 +30,18 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
         private double rating;
         private Recipe recipe;
         private String thePost;
+        private ArrayList<Recipe> allRec;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_post);
-            Intent fetchRecipe = getIntent(); //receive recipe object from RecipeActivity
-            recipe = (Recipe)fetchRecipe.getSerializableExtra("recToUpdate");
+            Intent getRecipe = getIntent(); //receive recipe object from RecipeActivity
+            recipe = (Recipe)getRecipe.getSerializableExtra("recToUpdate");
+
+
+
+//          thePost = (String)getRecipe.getSerializableExtra("newComment");
 
             // Spinner element
             Spinner spinner = (Spinner) findViewById(R.id.spinner1);
@@ -80,21 +90,44 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void startUpdatedProfileActivity(View view){
+
+
         EditText editPost = (EditText) findViewById(R.id.edit_post);
         String comment = editPost.getText().toString();
+
         thePost = rating + "\n" + comment;
-        recipe.updateRating(rating);
-        recipe.addComment(thePost);
+
         ////CRITICAL!!!!!!
         ////UPDATED CODE NEEDED HERE TO ADD A NEW PROFILE POST TO A USERS PROFILE!!!!
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+
+
+
         database.getReference().child("users").child(userID).child("attemptedRecipes").push().setValue(recipe);
 
-        Intent profile = new Intent(PostActivity.this, RecipeActivity.class);
-        profile.putExtra("recipeObject",recipe);
-        startActivity(profile);
+
+        recipe.updateRating(rating);
+        recipe.addComment(thePost);
+
+
+        Intent recPage = new Intent(PostActivity.this, RecipeActivity.class);
+
+        recPage.putExtra("recipeObject", recipe);
+        recPage.putExtra("check", "PostActivity");
+
+        startActivity(recPage);
+
+
     }
+
+
+
+
+
+
 
 
 }

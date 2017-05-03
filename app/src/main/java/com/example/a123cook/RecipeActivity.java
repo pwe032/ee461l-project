@@ -16,13 +16,23 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
 
     public Recipe recipe;
+    public boolean source;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_recipe);
         Intent getRecipe = getIntent(); //receive recipe object from ProfileActivity
-        recipe = (Recipe)getRecipe.getSerializableExtra("recipeObject");
+        String activity = getRecipe.getStringExtra("activity");
+
+        if (activity.equals("ProfileActivity") || activity.equals("PostActivity")){
+            recipe = (Recipe)getRecipe.getSerializableExtra("recipeObject");
+        }
+        else if(activity.equals("SearchRecipeActivity")){
+            recipe = (Recipe)getRecipe.getSerializableExtra("recipeObject2");
+        }
+
         makeDisplay(recipe); //show this recipe
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
@@ -78,7 +88,20 @@ public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
     }
 
     public void startPostActivity(View view){
+//        EditText editPost = (EditText) findViewById(R.id.edit_post);
+//        String comment = editPost.getText().toString();
+
+
+//        NEED TO GET NAME TOMORROW ASK MINKOO!!!!
+//        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//
+//        database.getReference().child("users").child(userID).
+
+//        comment =  "\n" + comment;
         Intent post = new Intent(RecipeActivity.this, PostActivity.class);
+//        post.putExtra("newComment", comment);
         post.putExtra("recToUpdate",recipe);
         startActivity(post);
     }

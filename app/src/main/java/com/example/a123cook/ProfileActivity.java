@@ -17,6 +17,7 @@ public class ProfileActivity extends ListActivity{
 
     private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
     private Context context;
+    private String source;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +25,10 @@ public class ProfileActivity extends ListActivity{
         super.onCreate(savedInstanceState);
         final ProfileArrayAdapter adapter = new ProfileArrayAdapter(this, recipes);
         setListAdapter(adapter);
-        Intent getProfileID = getIntent();
-        String profileID = (String) getProfileID.getSerializableExtra("profileID");
+
         //read from real-time Firebase database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users").child(profileID).child("attemptedRecipes");
+        DatabaseReference myRef = database.getReference("allRecipes");
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -60,11 +60,20 @@ public class ProfileActivity extends ListActivity{
     protected void onListItemClick(ListView l, View v, int position, long id) {
         //on click, pass current Recipe object to RecipeActivity to show full post
         Recipe recipe = this.recipes.get((int)id);
+
         Intent profile = new Intent(ProfileActivity.this, RecipeActivity.class);
         profile.putExtra("recipeObject", recipe);
+        profile.putExtra("check", "ProfileActivity");
+
+//      Intent recResults = new Intent(SearchRecipeActivity.this, RecipeActivity.class);
+//      recResults.putExtra("recipeObject2", recipe);
+//      profile.putExtra("check", "SearchRecipeActivity" );
+
         startActivity(profile);
     }
 }
+
+
 
 
 
