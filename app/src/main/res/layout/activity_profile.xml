@@ -17,19 +17,19 @@
         android:id="@+id/profileHeader">
 
         <ImageView
+            android:id="@+id/profilePicSmall"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/example_profile"
-            android:id="@+id/imageView"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:layout_gravity="center_vertical"/>
+            android:src="@drawable/example_profile" />
 
         <TextView
             android:text="123Cook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView3"
+            android:id="@+id/userNameSmall"
             android:layout_weight="1"
             android:textColor="@android:color/black"
             android:textStyle="bold"

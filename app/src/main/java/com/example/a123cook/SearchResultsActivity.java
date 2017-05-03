@@ -34,9 +34,11 @@ import java.util.List;
 public class SearchResultsActivity extends ListActivity{
     private String userID;
     private String userName;
+    private String email;
+    private String uname;
     private String[] nameTokens;
     private ArrayList<String> matchingNames = new ArrayList<String>();
-    private HashMap<String, String> identifier = new HashMap<>();
+    private HashMap<String, User> identifier = new HashMap<>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,14 +52,16 @@ public class SearchResultsActivity extends ListActivity{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot user : dataSnapshot.getChildren()) { //for each user objects
-                    String name = (String) user.child("name").getValue();
                     String ID = (String) user.child("userID").getValue();
-                    String[] username = name.split(" "); //name searched
+                    email = (String) user.child("email").getValue();
+                    uname = (String) user.child("name").getValue();
+                    String[] username = uname.split(" "); //name searched
                     String firstname = username[0].toLowerCase(); //name to compare
                     for (int i = 0; i < nameTokens.length; i++) {
                         if (firstname.equals(nameTokens[i].toLowerCase())) {
-                            adapter.add(name);
-                            identifier.put(name,ID);
+                            adapter.add(uname);
+                            User matchingUser = new User(ID, email, uname);
+                            identifier.put(uname,matchingUser);
                         }
                     }
                 }
@@ -77,12 +81,16 @@ public class SearchResultsActivity extends ListActivity{
         if(matchingNames.get(0).equals("No Result Found")){
             Toast.makeText(SearchResultsActivity.this, "Search Again!",
                     Toast.LENGTH_SHORT).show();
+            Intent goBack = new Intent(this, SearchActivity.class);
+            startActivity(goBack);
         }
-        String clickedName = this.matchingNames.get((int)id);
-        String userID = identifier.get(clickedName);
-        identifier.clear();
-        Intent profile = new Intent(this, ProfileIntroActivity.class);
-        profile.putExtra("userID", userID);
-        startActivity(profile);
+        else{
+            String clickedName = this.matchingNames.get((int)id);
+            User selectedUser = identifier.get(clickedName);
+            identifier.clear();
+            Intent profile = new Intent(this, ProfileIntroActivity.class);
+            profile.putExtra("SelectedUser", selectedUser);
+            startActivity(profile);
+        }
     }
 }

@@ -147,9 +147,9 @@ public class SignInActivity extends AppCompatActivity {
     public void onValidSignIn() {
         finish();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String ID = user.getUid();
+        User selecteduUser = new User(user.getUid(), user.getEmail(), user.getDisplayName());
         Intent profile = new Intent(SignInActivity.this, ProfileActivity.class);
-        profile.putExtra("profileID", ID);
+        profile.putExtra("profileUser", selecteduUser);
         startActivity(profile);
     }
 

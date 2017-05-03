@@ -1,216 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <!-- NEWLY ADDED THIS ONE -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:text="Account Information"
-            android:textColor="@android:color/black"
-            android:textSize="8pt"
-            tools:textColor="@android:color/black" />
-
-        <LinearLayout
-            android:id="@+id/account_top"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:layout_below="@+id/textView9">
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="130dp"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:text="Name"
-                android:textSize="8pt"/>
+                android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/AccountName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="8pt"
-                tools:textColor="@android:color/darker_gray" />
-        </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/account_second"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/account_top">
-            <TextView
-                android:id="@+id/email"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textSize="8pt"
-                android:text="Account Email" />
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:text="Account Information"
+                        android:textColor="@android:color/black"
+                        android:textSize="8pt"
+                        tools:textColor="@android:color/black" />
 
-            <TextView
-                android:id="@+id/AccountEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="8pt" />
-        </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/account_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView9"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/account_third"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/account_second">
-            <TextView
-                android:id="@+id/photourl"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textSize="8pt"
-                android:text="Photo URL" />
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:text="Name"
+                            android:textSize="8pt" />
 
-            <TextView
-                android:id="@+id/AccountPhotoUrl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="8pt"
-                tools:textColor="@android:color/darker_gray" />
-        </LinearLayout>
+                        <TextView
+                            android:id="@+id/AccountName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="8pt"
+                            tools:textColor="@android:color/darker_gray" />
+                    </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/account_third"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Account Settings"
-            android:textColor="@android:color/black"
-            android:textSize="8pt"
-            tools:textColor="@android:color/black" />
+                    <LinearLayout
+                        android:id="@+id/account_second"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/account_top"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/changeName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/textView10">
+                        <TextView
+                            android:id="@+id/email"
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:text="Account Email"
+                            android:textSize="8pt" />
 
-            <EditText
-                android:id="@+id/editText7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                        <TextView
+                            android:id="@+id/AccountEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="8pt" />
+                    </LinearLayout>
 
-            <Button
-                android:id="@+id/nameButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Change Name" />
-        </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/account_third"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/account_second"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/changeEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/changeName">
+                        <TextView
+                            android:id="@+id/photourl"
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:text="Photo URL"
+                            android:textSize="8pt" />
 
-            <EditText
-                android:id="@+id/editText11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                        <TextView
+                            android:id="@+id/AccountPhotoUrl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="8pt"
+                            tools:textColor="@android:color/darker_gray" />
+                    </LinearLayout>
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Change Email" />
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/account_third"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Account Settings"
+                        android:textColor="@android:color/black"
+                        android:textSize="8pt"
+                        tools:textColor="@android:color/black" />
 
-        <LinearLayout
-            android:id="@+id/changeURL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/changeEmail">
+                    <LinearLayout
+                        android:id="@+id/changeName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView10"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/editText12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                        <EditText
+                            android:id="@+id/editText7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Enter New Name"
+                            android:inputType="textPersonName" />
 
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="set url" />
-        </LinearLayout>
-    </RelativeLayout>
+                        <Button
+                            android:id="@+id/nameButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Change Name" />
+                    </LinearLayout>
 
-</LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/changeEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/changeName"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/editText11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Enter new email"
+                            android:inputType="textPersonName" />
+
+                        <Button
+                            android:id="@+id/button4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Change Email" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/changeURL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/changeEmail"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/editText12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="Enter New URL"
+                            android:inputType="textPersonName" />
+
+                        <Button
+                            android:id="@+id/changepicurl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="set url" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
 
     <!-- The navigation drawer that comes from the left -->
     <!-- Note that `android:layout_gravity` needs to be set to 'start' -->

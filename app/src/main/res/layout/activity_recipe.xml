@@ -31,22 +31,33 @@
                 android:layout_weight="1">
             </ImageView>
 
-            <ImageView
-                android:id="@+id/recRating"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/recPic"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
                 android:layout_marginBottom="@dimen/activity_vertical_margin">
-            </ImageView>
 
-            <Button
-                android:id="@+id/buttonPost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Make Post"
-                android:onClick="startPostActivity" />
+                <ImageView
+                    android:id="@+id/recRating"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/recPic"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_weight="1"></ImageView>
+
+                <Button
+                    android:id="@+id/buttonPost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="64dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_weight="1"
+                    android:onClick="startPostActivity"
+                    android:text="Make Post" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

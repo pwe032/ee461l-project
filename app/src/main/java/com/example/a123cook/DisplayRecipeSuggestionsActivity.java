@@ -42,8 +42,8 @@ public class DisplayRecipeSuggestionsActivity extends ListActivity implements Se
             System.out.println(r.name);     //TODO: delete this teting line
         }
 
-        final ProfileArrayAdapter adapter = new ProfileArrayAdapter(this, suggestedRecipes);
-        setListAdapter(adapter);
+        //final ProfileArrayAdapter adapter = new ProfileArrayAdapter(this, suggestedRecipes);
+       // setListAdapter(adapter);
     }
 
 

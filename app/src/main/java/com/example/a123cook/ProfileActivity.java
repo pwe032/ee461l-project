@@ -23,10 +23,11 @@ public class ProfileActivity extends ListActivity{
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        final ProfileArrayAdapter adapter = new ProfileArrayAdapter(this, recipes);
-        setListAdapter(adapter);
         Intent getProfileID = getIntent();
-        String profileID = (String) getProfileID.getSerializableExtra("profileID");
+        User user = (User) getProfileID.getSerializableExtra("profileUser");
+        final ProfileArrayAdapter adapter = new ProfileArrayAdapter(this, recipes, user);
+        setListAdapter(adapter);
+        String profileID = user.getUserID();
         //read from real-time Firebase database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users").child(profileID).child("attemptedRecipes");

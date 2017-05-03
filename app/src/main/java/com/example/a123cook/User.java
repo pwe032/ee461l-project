@@ -6,6 +6,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,12 +15,12 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class User {
+public class User implements Serializable{
 
     private String userID;
     private String email;
     private String name;
-    private Uri photoUri;
+    private String photoUrl;
     private List<Recipe> attemptedRecipes;
 
     public User() {} //for Firebase data snapshot
@@ -28,7 +30,7 @@ public class User {
         this.userID = firebaseUser.getUid();
         this.email = firebaseUser.getEmail();
         this.name = name;
-        this.photoUri = firebaseUser.getPhotoUrl();
+        this.photoUrl = "http://www.t5a.com/wp-content/uploads/2014/03/bluehead.png";
         this.attemptedRecipes = new ArrayList<Recipe>();
         this.userIngredients = new ArrayList<String>();
 
@@ -47,6 +49,13 @@ public class User {
         this.attemptedRecipes = attemptedRecipes;
         this.userIngredients = userIngredients;
     }
+    public User(String userID, String email, String name) { //Datasnapshot
+        this.userID = userID;
+        this.email = email;
+        this.name = name;
+        this.attemptedRecipes = attemptedRecipes;
+        this.userIngredients = userIngredients;
+    }
 
     public String getName() {
         return name;
@@ -56,9 +65,9 @@ public class User {
         return email;
     }
 
-    public Uri getPhotoUri(){return photoUri;}
+    public String getPhotoUrl(){return photoUrl;}
 
-    public void setPhotoUri(Uri uri){photoUri = uri;}
+    public void setPhotoUri(String url){photoUrl = url;}
 
     public List<Recipe> getAttemptedRecipes() {
         return attemptedRecipes;

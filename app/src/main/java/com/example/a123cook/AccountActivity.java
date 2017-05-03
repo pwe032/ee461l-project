@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -16,6 +17,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -32,13 +37,21 @@ public class AccountActivity extends MainActivity{
         user = FirebaseAuth.getInstance().getCurrentUser();
         TextView accountName = (TextView)findViewById(R.id.AccountName);
         TextView accountEmail = (TextView)findViewById(R.id.AccountEmail);
-        TextView accountPhotoURL = (TextView)findViewById(R.id.AccountPhotoUrl);
+        final TextView accountPhotoURL = (TextView)findViewById(R.id.AccountPhotoUrl);
         String name = user.getDisplayName();
         String email = user.getEmail();
-        String photoURL = "no image";
+        FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("photoUrl").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String source = dataSnapshot.getValue(String.class);
+                accountPhotoURL.setText(source);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
         accountName.setText(name);
         accountEmail.setText(email);
-        accountPhotoURL.setText(photoURL);
 
         Button updateName = (Button)findViewById(R.id.nameButton);
         updateName.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +66,19 @@ public class AccountActivity extends MainActivity{
             @Override
             public void onClick(View v) {
                 changeEmail();
+            }
+        });
+
+        Button updatephotoURL = (Button)findViewById(R.id.changepicurl);
+        updatephotoURL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editPhotoURL = (EditText)findViewById(R.id.editText12);
+                String newUrl = editPhotoURL.getText().toString();
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                String userID = currentUser.getUid();
+                FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("photoUrl").setValue(newUrl);
+                editPhotoURL.getText().clear();
             }
         });
     }

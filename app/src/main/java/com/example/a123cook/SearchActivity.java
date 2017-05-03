@@ -28,6 +28,7 @@ public class SearchActivity extends MainActivity {
             Entry = name.getText().toString();
             Intent resultsPage = new Intent(this, SearchResultsActivity.class); //CHNAGE TO MESSAGE ACT
             resultsPage.putExtra("Name", Entry);
+            name.getText().clear();
             startActivity(resultsPage);
         }
 
