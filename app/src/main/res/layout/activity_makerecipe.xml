@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- NEWLY ADDED THIS ONE -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -13,7 +20,7 @@
         android:layout_width="200dp"
         android:layout_height="30dp"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="Enter Recipe Name"
         android:ems="10"
         android:id="@+id/editTextRecName" />
     <TextView
@@ -26,7 +33,7 @@
         android:layout_width="200dp"
         android:layout_height="30dp"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="Enter Food Type"
         android:ems="10"
         android:id="@+id/editTextFoodType" />
     <TextView
@@ -39,7 +46,7 @@
         android:layout_width="200dp"
         android:layout_height="30dp"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="Enter Dificulty Ex) 1~5"
         android:ems="10"
         android:id="@+id/editTextDifficulty" />
     <TextView
@@ -52,7 +59,7 @@
         android:layout_width="200dp"
         android:layout_height="30dp"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="Enter Ingredients"
         android:ems="10"
         android:id="@+id/editTextIngredients" />
     <TextView
@@ -65,9 +72,17 @@
         android:layout_width="200dp"
         android:layout_height="30dp"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="Enter Instruction"
         android:ems="10"
         android:id="@+id/editTextInsructions" />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:inputType="textPersonName"
+        android:hint="Enter Picture URL"
+        android:ems="10"
+        android:id="@+id/editTextPictureURL" />
 
     <Button
         android:text="Button"
@@ -77,4 +92,16 @@
         android:onClick="startUploadActivity"/>
 
 
+
 </LinearLayout>
+    <!-- The navigation drawer that comes from the left -->
+    <!-- Note that `android:layout_gravity` needs to be set to 'start' -->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nvView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        app:menu="@layout/menu_drawer_view" />
+</android.support.v4.widget.DrawerLayout>
+

@@ -88,7 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             .setDisplayName(name).build());
                             User newUser = new User(FirebaseAuth.getInstance().getCurrentUser(), name);
                             System.out.println("LOG: new user has signed up with name: " + newUser.getAttemptedRecipes());
-                            newUser.addAttemptedRecipe(new Recipe("gn", 1.0, "gn_logo", "asian", "5", "instr", "ingredients"));
+//                            newUser.addAttemptedRecipe(new Recipe("gn", 1.0, "https://static.pexels.com/photos/5317/food-salad-restaurant-person.jpg", "asian", "5", "instr", "ingredients"));
                             onValidSignUp();
                         }
                     }

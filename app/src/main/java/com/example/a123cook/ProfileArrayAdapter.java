@@ -42,7 +42,20 @@ public class ProfileArrayAdapter extends ArrayAdapter<Recipe>{
         TextView smallName = (TextView) rowView.findViewById(R.id.userNameSmall); // Recipe post has a food name
         final ImageView smallPic = (ImageView) rowView.findViewById(R.id.profilePicSmall); // Recipe post has food image
         TextView foodName = (TextView) rowView.findViewById(R.id.label); // Recipe post has a food name
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.logo); // Recipe post has food image
+        final ImageView foodPic = (ImageView)rowView.findViewById(R.id.logo);
+        //////////////////////////////////////////////////////////
+        FirebaseDatabase.getInstance().getReference().child("users").child(user.getUserID()).child("attemptedRecipes").child(values.get(position).getRecipeID()).child("imgUrl").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String source = dataSnapshot.getValue(String.class);
+                System.out.println("Gaurav's image is: " + source);
+                new ProfileArrayAdapter.DownloadImageTasks(foodPic) .execute(source);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
         ImageView rating = (ImageView) rowView.findViewById(R.id.rating); // Recipe post has rating images of stars
         TextView foodType = (TextView) rowView.findViewById(R.id.foodType); // food type
         TextView difficulty = (TextView) rowView.findViewById(R.id.difficulty); // difficulty
@@ -65,9 +78,6 @@ public class ProfileArrayAdapter extends ArrayAdapter<Recipe>{
 
         // Keep track of each Recipe by its name; Later, obtain image url directly from the Recipe object
         String s = values.get(position).imgUrl;
-        //match food image
-        int res = this.getContext().getResources().getIdentifier(values.get(position).imgUrl, "drawable",this.getContext().getPackageName());
-        imageView.setImageResource(res);
 
         //match star image
         if(values.get(position).rating == 5.0){

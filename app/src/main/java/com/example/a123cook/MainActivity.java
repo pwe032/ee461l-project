@@ -88,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent signOut = new Intent(this, SignOutActivity.class);
                 startActivity(signOut);
                 break;
+            case R.id.nav_seventh_fragment:
+                Intent makeRecipe = new Intent(this, MakeRecipeActivity.class);
+                startActivity(makeRecipe);
+                break;
             default:
         }
 

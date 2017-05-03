@@ -148,8 +148,8 @@ public class SignInActivity extends AppCompatActivity {
         finish();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         User selecteduUser = new User(user.getUid(), user.getEmail(), user.getDisplayName());
-        Intent profile = new Intent(SignInActivity.this, ProfileActivity.class);
-        profile.putExtra("profileUser", selecteduUser);
+        Intent profile = new Intent(SignInActivity.this, ProfileIntroActivity.class);
+        profile.putExtra("SelectedUser", selecteduUser);
         startActivity(profile);
     }
 

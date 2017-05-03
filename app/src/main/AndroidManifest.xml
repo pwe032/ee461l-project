@@ -69,6 +69,7 @@
             android:name=".MessageActivity">
         </activity>
 
+
         <activity
                 android:name=".UserIngredientsActivity"
                 android:label="@string/title_activity_user_ingredients"

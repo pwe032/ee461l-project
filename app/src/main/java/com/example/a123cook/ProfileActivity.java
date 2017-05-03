@@ -18,6 +18,7 @@ public class ProfileActivity extends ListActivity{
     private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
     private Context context;
     private String source;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class ProfileActivity extends ListActivity{
         reversedRecipes = reverse(recipes);
 
         Intent getProfileID = getIntent();
-        User user = (User) getProfileID.getSerializableExtra("profileUser");
+        user = (User) getProfileID.getSerializableExtra("profileUser");
         final ProfileArrayAdapter adapter = new ProfileArrayAdapter(this, recipes, user);
         setListAdapter(adapter);
         String profileID = user.getUserID();
@@ -69,7 +70,7 @@ public class ProfileActivity extends ListActivity{
         Intent profile = new Intent(ProfileActivity.this, RecipeActivity.class);
         profile.putExtra("recipeObject", recipe);
         profile.putExtra("check", "ProfileActivity");
-
+        profile.putExtra("userID", user.getUserID());
 //      Intent recResults = new Intent(SearchRecipesActivity.this, RecipeActivity.class);
 //      recResults.putExtra("recipeObject2", recipe);
 //      profile.putExtra("check", "SearchRecipesActivity" );
