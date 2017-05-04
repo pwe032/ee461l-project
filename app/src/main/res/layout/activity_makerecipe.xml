@@ -6,94 +6,100 @@
     android:layout_height="match_parent">
 
     <!-- NEWLY ADDED THIS ONE -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:text="Recipe Name"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:id="@+id/textViewRecName" />
+        <TextView
+            android:text="Recipe Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewRecName" />
 
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:inputType="textPersonName"
-        android:hint="Enter Recipe Name"
-        android:ems="10"
-        android:id="@+id/editTextRecName" />
-    <TextView
-        android:text="Food Type"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:id="@+id/textViewFoodType" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Enter Recipe Name"
+            android:ems="10"
+            android:id="@+id/editTextRecName" />
+        <TextView
+            android:text="Food Type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewFoodType" />
 
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:inputType="textPersonName"
-        android:hint="Enter Food Type"
-        android:ems="10"
-        android:id="@+id/editTextFoodType" />
-    <TextView
-        android:text="Difficulty"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:id="@+id/textViewDifficulty" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Enter Food Type"
+            android:ems="10"
+            android:id="@+id/editTextFoodType" />
+        <TextView
+            android:text="Difficulty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewDifficulty" />
 
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:inputType="textPersonName"
-        android:hint="Enter Dificulty Ex) 1~5"
-        android:ems="10"
-        android:id="@+id/editTextDifficulty" />
-    <TextView
-        android:text="Ingredients"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:id="@+id/textViewIngredients" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Enter Dificulty Ex) 1~5"
+            android:ems="10"
+            android:id="@+id/editTextDifficulty" />
+        <TextView
+            android:text="Ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewIngredients" />
 
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:inputType="textPersonName"
-        android:hint="Enter Ingredients"
-        android:ems="10"
-        android:id="@+id/editTextIngredients" />
-    <TextView
-        android:text="Instructions"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:id="@+id/textViewInsructions" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Enter Ingredients"
+            android:ems="10"
+            android:id="@+id/editTextIngredients" />
+        <TextView
+            android:text="Instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewInsructions" />
 
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:inputType="textPersonName"
-        android:hint="Enter Instruction"
-        android:ems="10"
-        android:id="@+id/editTextInsructions" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Enter Instructions"
+            android:ems="10"
+            android:id="@+id/editTextInsructions" />
 
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:inputType="textPersonName"
-        android:hint="Enter Picture URL"
-        android:ems="10"
-        android:id="@+id/editTextPictureURL" />
+        <TextView
+            android:text="Picture URL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewPictureURL" />
 
-    <Button
-        android:text="Button"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:id="@+id/buttonUploadRec"
-        android:onClick="startUploadActivity"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Enter Picture URL"
+            android:ems="10"
+            android:id="@+id/editTextPictureURL" />
+
+        <Button
+            android:text="Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonUploadRec"
+            android:onClick="startUploadActivity"/>
 
 
 
-</LinearLayout>
+    </LinearLayout>
     <!-- The navigation drawer that comes from the left -->
     <!-- Note that `android:layout_gravity` needs to be set to 'start' -->
     <android.support.design.widget.NavigationView
@@ -104,4 +110,5 @@
         android:background="@android:color/white"
         app:menu="@layout/menu_drawer_view" />
 </android.support.v4.widget.DrawerLayout>
+
 
