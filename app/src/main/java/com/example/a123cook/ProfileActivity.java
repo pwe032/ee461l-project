@@ -39,8 +39,8 @@ public class ProfileActivity extends ListActivity{
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Recipe rec = dataSnapshot.getValue(Recipe.class);
-//                adapter.add(rec);
-                adapter.insert(rec,0);
+                adapter.add(rec);
+//                adapter.insert(rec,0);
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
