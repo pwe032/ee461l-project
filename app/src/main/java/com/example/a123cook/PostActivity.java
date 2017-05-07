@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -139,23 +140,21 @@ public class PostActivity extends MainActivity implements AdapterView.OnItemSele
 
         ////CRITICAL!!!!!!
         ////UPDATED CODE NEEDED HERE TO ADD A NEW PROFILE POST TO A USERS PROFILE!!!!
-
-
-        if (!allAttemptedRecipes.contains(recipe)) {
-            database.getReference().child("users").child(userID).child("attemptedRecipes").push().setValue(recipe);
-        }
-
-
         recipe.updateRating(rating);
         recipe.addComment(thePost);
 
+        if (!allAttemptedRecipes.contains(recipe)) {
+            DatabaseReference myRef = database.getReference().child("users").child(userID);
+            DatabaseReference recipeRef = myRef.child("attemptedRecipes").push();
+            String ID = recipeRef.getKey();
+            recipe.setRecipeID(ID);
+            recipeRef.setValue(recipe);
+        }
 
-        Intent recPage = new Intent(PostActivity.this, RecipeActivity.class);
-
-        recPage.putExtra("recipeObject", recipe);
-        recPage.putExtra("check", "PostActivity");
-
-        startActivity(recPage);
+        Intent IntroPage = new Intent(PostActivity.this, ProfileIntroActivity.class);
+        User user = new User (FirebaseAuth.getInstance().getCurrentUser().getUid(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        IntroPage.putExtra("SelectedUser", user);
+        startActivity(IntroPage);
 
 
     }

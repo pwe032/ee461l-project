@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- NEWLY ADDED THIS ONE -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:id="@+id/content_frame">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/recPic2"
+                    android:layout_width="match_parent"
+                    android:layout_height="275dp"
+                    android:layout_weight="1">
+                </ImageView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+                    <ImageView
+                        android:id="@+id/recRating2"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/recPic2"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_weight="1"></ImageView>
+
+                    <Button
+                        android:id="@+id/buttonPost2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="64dp"
+                        android:layout_marginRight="13dp"
+                        android:layout_weight="1"
+                        android:onClick="startPostActivity2"
+                        android:text="Make Post" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:id="@+id/foodName2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@+id/foodName"
+                        android:fontFamily="sans-serif-condensed"
+                        android:textSize="13pt"
+                        android:textColor="@android:color/black"
+                        android:layout_below="@+id/recRating2">
+                    </TextView>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="0.37">
+
+                        <TextView
+                            android:text="STYLE"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView42"
+                            android:layout_weight="1"
+                            android:textSize="6pt"
+                            android:layout_gravity="center_horizontal"
+                            tools:fontFamily="sans-serif-condensed"
+                            android:textColor="@android:color/darker_gray" />
+
+                        <TextView
+                            android:id="@+id/recType2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@+id/foodType"
+                            android:textColor="@android:color/black"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textSize="8pt"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1">
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="0.76">
+
+                        <TextView
+                            android:text="DIFFICULTY"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView52"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:textSize="6pt"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textColor="@android:color/darker_gray" />
+
+                        <TextView
+                            android:id="@+id/skillLevel2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@+id/skillLevel"
+                            android:fontFamily="sans-serif-condensed"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="8pt"
+                            android:textColor="@android:color/black"
+                            android:layout_weight="1">
+                        </TextView>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:text="INGREDIENTS"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView62"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginBottom="3dp"
+                    android:textSize="6pt"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/ingredients2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@+id/ingredients"
+                    android:textSize="8pt"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin">
+                </TextView>
+
+                <TextView
+                    android:text="INSTRUCTION"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginBottom="3dp"
+                    android:id="@+id/textView72"
+                    android:layout_weight="1"
+                    android:textSize="6pt"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/instructions2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@+id/instructions"
+                    android:textSize="8pt"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/reviewSection2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="REVIEWS"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:textColor="@android:color/darker_gray"/>
+
+                <TextView
+                    android:id="@+id/comments2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="comments"
+                    android:textSize="8pt"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin">
+                </TextView>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+
+    <!-- The navigation drawer that comes from the left -->
+    <!-- Note that `android:layout_gravity` needs to be set to 'start' -->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nvView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        app:headerLayout = "@layout/nav_header"
+        app:menu="@layout/menu_drawer_view" />
+</android.support.v4.widget.DrawerLayout>
+
+

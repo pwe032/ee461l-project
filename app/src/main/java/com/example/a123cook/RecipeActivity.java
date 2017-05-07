@@ -111,20 +111,7 @@ public class RecipeActivity extends MainActivity{ //originally AppCompatActivity
     }
 
     public void startPostActivity(View view){
-//        EditText editPost = (EditText) findViewById(R.id.edit_post);
-//        String comment = editPost.getText().toString();
-
-
-//        NEED TO GET NAME TOMORROW ASK MINKOO!!!!
-//        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//
-//        database.getReference().child("users").child(userID).
-
-//        comment =  "\n" + comment;
         Intent post = new Intent(RecipeActivity.this, PostActivity.class);
-//        post.putExtra("newComment", comment);
         post.putExtra("recToUpdate",recipe);
         startActivity(post);
     }

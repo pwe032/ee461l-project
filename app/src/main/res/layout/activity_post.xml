@@ -23,7 +23,6 @@
     <EditText android:id="@+id/edit_post"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginBottom="50dp"
         android:hint="Post"/>
 
     <TextView
@@ -35,15 +34,14 @@
         android:id="@+id/spinner1"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="175dp"
         android:spinnerMode="dropdown" />
 
     <Button
         android:id="@+id/buttonFinishPost"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="Finish Post!"
-        android:onClick="startUpdatedProfileActivity" />
+        android:onClick="startUpdatedProfileActivity"
+        android:text="Finish Post!" />
 </LinearLayout>
 
     <!-- The navigation drawer that comes from the left -->

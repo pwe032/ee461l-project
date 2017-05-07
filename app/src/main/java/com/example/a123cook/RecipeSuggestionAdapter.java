@@ -21,13 +21,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class ProfileArrayAdapter extends ArrayAdapter<Recipe>{
+
+public class RecipeSuggestionAdapter extends ArrayAdapter<Recipe> { //just like ProfileArrayAdapter
     private final Context context;
     private final ArrayList<Recipe> values;
     private User user;
 
-    public ProfileArrayAdapter(Context context, ArrayList<Recipe> values, User user) {
-        super(context, R.layout.activity_profile, values);
+    public RecipeSuggestionAdapter(Context context, ArrayList<Recipe> values, User user) {
+        super(context, R.layout.activity_recipe_suggestion, values);
         this.context = context;
         this.values = values;
         this.user = user;
@@ -37,37 +38,29 @@ public class ProfileArrayAdapter extends ArrayAdapter<Recipe>{
     public View getView(int position, View convertView, ViewGroup parent) {
         //determine how Profile Listview will present its contents
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.activity_profile, parent, false);
+        View rowView = inflater.inflate(R.layout.activity_recipe_suggestion, parent, false);
         //create View components that make up the recipe post
-        TextView smallName = (TextView) rowView.findViewById(R.id.userNameSmall); // Recipe post has a food name
-        final ImageView smallPic = (ImageView) rowView.findViewById(R.id.profilePicSmall); // Recipe post has food image
-        TextView foodName = (TextView) rowView.findViewById(R.id.label); // Recipe post has a food name
-        final ImageView foodPic = (ImageView)rowView.findViewById(R.id.logo);
+        TextView smallName = (TextView) rowView.findViewById(R.id.userNameSmall2); // Recipe post has a food name
+        final ImageView smallPic = (ImageView) rowView.findViewById(R.id.profilePicSmall2); // Recipe post has food image
+        TextView foodName = (TextView) rowView.findViewById(R.id.label2); // Recipe post has a food name
+        final ImageView foodPic = (ImageView)rowView.findViewById(R.id.logo2);
         //////////////////////////////////////////////////////////
-        FirebaseDatabase.getInstance().getReference().child("users").child(user.getUserID()).child("attemptedRecipes").child(values.get(position).getRecipeID()).child("imgUrl").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String source = dataSnapshot.getValue(String.class);
-                new ProfileArrayAdapter.DownloadImageTasks(foodPic) .execute(source);
-            }
+        String source = values.get(position).imgUrl;
+        new RecipeSuggestionAdapter.DownloadImageTasks2(foodPic) .execute(source);
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-        ImageView rating = (ImageView) rowView.findViewById(R.id.rating); // Recipe post has rating images of stars
-        TextView foodType = (TextView) rowView.findViewById(R.id.foodType); // food type
-        TextView difficulty = (TextView) rowView.findViewById(R.id.difficulty); // difficulty
+        ImageView rating = (ImageView) rowView.findViewById(R.id.rating2); // Recipe post has rating images of stars
+        TextView foodType = (TextView) rowView.findViewById(R.id.foodType2); // food type
+        TextView difficulty = (TextView) rowView.findViewById(R.id.difficulty2); // difficulty
         //give View components their appropriate values from a Recipe object
         foodName.setText(values.get(position).name);
         foodType.setText("Food Type: " + values.get(position).foodType);
         difficulty.setText("Difficulty: "+values.get(position).difficulty);
-        smallName.setText(user.getName());
+        smallName.setText("Recipe Suggestion");
         FirebaseDatabase.getInstance().getReference().child("users").child(user.getUserID()).child("photoUrl").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String source = dataSnapshot.getValue(String.class);
-                new ProfileArrayAdapter.DownloadImageTasks(smallPic) .execute(source);
+                new RecipeSuggestionAdapter.DownloadImageTasks2(smallPic) .execute(source);
             }
 
             @Override
@@ -106,14 +99,15 @@ public class ProfileArrayAdapter extends ArrayAdapter<Recipe>{
         return rowView;
     } //end of getView()
 
-    public class DownloadImageTasks extends AsyncTask<String, Void, Bitmap> {
+    public class DownloadImageTasks2 extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
-        public DownloadImageTasks(ImageView bmImage) {
+        public DownloadImageTasks2(ImageView bmImage) {
             this.bmImage = bmImage;
         }
 
         protected Bitmap doInBackground(String... urls) {
             String urldisplay = urls[0];
+            System.out.println("Url[0] in RecipeSuggestionAdapter: " + urldisplay);
             Bitmap mIcon11 = null;
             try {
                 InputStream in = new java.net.URL(urldisplay).openStream();

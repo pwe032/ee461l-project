@@ -20,6 +20,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,9 +31,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class UserIngredientsActivity extends MainActivity {
-    RecipeDatabase rdb;
+    //    RecipeDatabase rdb;
     TableLayout table;
-    private ArrayList<String> userIngredients;
+    private ArrayList<String> userIngredients;// = new ArrayList<String>();;
     EditText ingredientsTypeEditText;
 
     @Override
@@ -42,37 +43,62 @@ public class UserIngredientsActivity extends MainActivity {
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
-        table = (TableLayout) findViewById(R.id.tlGridTable);
-        rdb = new RecipeDatabase();     //TODO: get this part done/to work without making RecipeDatabase public
+//        table = (TableLayout) findViewById(R.id.tlGridTable);
         userIngredients = new ArrayList<String>();
         ingredientsTypeEditText = (EditText) findViewById(R.id.ingredientsTypeEditText);
-    }
 
+        userIngredients = new ArrayList<String>();
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("userIngredients")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String ingredient = snapshot.getValue(String.class);
+                            userIngredients.add(ingredient);                     //don't all duplicates
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
 
-public ArrayList<String> sort(ArrayList<String> userIngredients){//}, ArrayList<String> userIngredientsNum) {
-    String tmp;
-    String tmpNum;
-    for (int i = 0;i < userIngredients.size();i++)
-    {
-        tmp = userIngredients.get(i);
-        tmpNum = userIngredients.get(i);
-        for (int j = 0;j < userIngredients.size();j++)
-        {
-            if (i == j) continue;
-            int x = tmp.compareTo(userIngredients.get(j));
-            if (x < 0)
-            {
-                tmp = userIngredients.get(j);
-                userIngredients.set(j, userIngredients.get(i));
-                userIngredients.set(i, tmp);
-            }
+        table = (TableLayout)findViewById(R.id.tlGridTable);
+        table.removeAllViews();                                                 //clear the table
+
+        for (int i = 0; i < userIngredients.size(); i++) {           //add back the new table
+            TableRow row = new TableRow(this);
+            String iNameString = userIngredients.get(i);
+            TextView iNameTextView = new TextView(this);
+            iNameTextView.setText("" + iNameString);
+            row.addView(iNameTextView);
+            table.addView(row);
         }
     }
-    return userIngredients;
-}
 
 
-//    }
+    public ArrayList<String> sort(ArrayList<String> userIngredients){//}, ArrayList<String> userIngredientsNum) {
+        String tmp;
+        String tmpNum;
+        for (int i = 0;i < userIngredients.size();i++)
+        {
+            tmp = userIngredients.get(i);
+            tmpNum = userIngredients.get(i);
+            for (int j = 0;j < userIngredients.size();j++)
+            {
+                if (i == j) continue;
+                int x = tmp.compareTo(userIngredients.get(j));
+                if (x < 0)
+                {
+                    tmp = userIngredients.get(j);
+                    userIngredients.set(j, userIngredients.get(i));
+                    userIngredients.set(i, tmp);
+                }
+            }
+        }
+        return userIngredients;
+    }
+
 
     public void addButtonOnClick(View view){
         String ingredientsTypeText = ingredientsTypeEditText.getText().toString();
@@ -82,30 +108,13 @@ public ArrayList<String> sort(ArrayList<String> userIngredients){//}, ArrayList<
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         if(!(userIngredients.contains(ingredientsTypeText))){            //only add if ingredient isn't already in there
-//            userIngredients.add(ingredientsTypeText);                    //add ingredient to use ingredient list
-
             //below should switch from temp arraylist to adding to the database
             database.getReference().child("users").child(userID).child("userIngredients").push().setValue(ingredientsTypeText);
         }
 
-//        userIngredients = new ArrayList<String>();
-
-        FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("userIngredients")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            String ingredient = (String) snapshot.getValue();
-                            if(!(userIngredients.contains(ingredient))){
-                                userIngredients.add(ingredient);                     //don't all duplicates
-                                System.out.println(ingredient);
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
+        if(!(userIngredients.contains(ingredientsTypeText))){
+            userIngredients.add(ingredientsTypeText);
+        }
 
         sort(userIngredients);
 
@@ -121,68 +130,32 @@ public ArrayList<String> sort(ArrayList<String> userIngredients){//}, ArrayList<
             row.addView(iNameTextView);
             table.addView(row);
         }
-
-        System.out.println(ingredientsTypeText);
         ingredientsTypeEditText.getText().clear();
     }
 
     public void deleteButtonOnClick(View view){
-        String ingredientsTypeText = ingredientsTypeEditText.getText().toString();
-        ingredientsTypeText = ingredientsTypeText.trim();
+        final String ingredientsTypeText = ingredientsTypeEditText.getText().toString().trim();
+        userIngredients.remove(ingredientsTypeText);            //delete the ingredient to the user ArrayList of ingredients
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-
-
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        Query ingredientQuery = ref.child("user").child(userID).child("userIngredients").equalTo(ingredientsTypeText);
-
-        ingredientQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+        final DatabaseReference myRef = database.getReference("users").child(userID).child("userIngredients");
+        FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("userIngredients").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot ingredientSnapshot: dataSnapshot.getChildren()) {
-                    ingredientSnapshot.getRef().removeValue();
+                for (DataSnapshot ingredient : dataSnapshot.getChildren()) { //for each user objects
+                    String currentIngredient = (String) ingredient.getValue();
+                    if(currentIngredient.equals(ingredientsTypeText)){
+                        String recipeIngredientID = ingredient.getKey();
+                        myRef.child(recipeIngredientID).setValue(null);     //remove from database
+                    }
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-//                Log.e(TAG, "onCancelled", databaseError.toException());
+                // Unable to retrieve the users.
             }
         });
-
-        //TODO: change below to remove ingredients from the database
-//        int index = userIngredients.indexOf(ingredientsTypeText);
-//        userIngredients.remove(ingredientsTypeText);            //delete the ingredient to the user ArrayList of ingredients
-
-
-
-
-
-
-
-
-
-//        userIngredients = new ArrayList<String>();
-
-        FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("userIngredients")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            String ingredient = (String) snapshot.getValue();
-                            if(!(userIngredients.contains(ingredient))){
-                                userIngredients.add(ingredient);                     //don't all duplicates
-                                System.out.println(ingredient);
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-
 
         sort(userIngredients);
 
