@@ -91,7 +91,7 @@
             android:id="@+id/editTextPictureURL" />
 
         <Button
-            android:text="Button"
+            android:text="Upload Recipe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buttonUploadRec"
